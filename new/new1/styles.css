@@ -1,0 +1,441 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Dancing Script', cursive;
+    overflow-x: hidden;
+    background-color: #0a0e27;
+    color: #fff;
+}
+
+/* Phần chung */
+section {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.message {
+    max-width: 800px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.scroll-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Dancing Script', cursive;
+    margin-top: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Phần Noel */
+.christmas-section {
+    background: linear-gradient(to bottom, #0a0e27, #1a237e);
+    overflow: hidden;
+}
+
+.christmas-section .title {
+    color: #e74c3c;
+}
+
+.christmas-section .subtitle {
+    color: #f1c40f;
+}
+
+.ornament {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.ornament-ball {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 10px;
+    animation: swing 3s infinite ease-in-out;
+}
+
+.ornament-ball:nth-child(1) {
+    background-color: #e74c3c;
+    animation-delay: 0s;
+}
+
+.ornament-ball:nth-child(2) {
+    background-color: #f1c40f;
+    animation-delay: 0.5s;
+}
+
+.ornament-ball:nth-child(3) {
+    background-color: #2ecc71;
+    animation-delay: 1s;
+}
+
+/* Phần Năm Mới */
+.newyear-section {
+    background: linear-gradient(to bottom, #1a237e, #0a0e27);
+}
+
+.newyear-section .title {
+    color: #3498db;
+}
+
+.newyear-section .subtitle {
+    color: #ecf0f1;
+}
+
+/* Phần Gallery */
+.gallery-section {
+    background: linear-gradient(to bottom, #0a0e27, #1a1a2e);
+    padding: 4rem 2rem;
+}
+
+.gallery-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #e74c3c;
+    text-align: center;
+}
+
+.gallery-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    color: #f1c40f;
+    text-align: center;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.memory-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.memory-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-front {
+    background-color: #bbb;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-back {
+    background-color: #e74c3c;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.final-message {
+    max-width: 800px;
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    background-color: rgba(231, 76, 60, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.final-message h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f1c40f;
+}
+
+.final-message p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+/* Hiệu ứng tuyết rơi */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes swing {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Hiệu ứng fade-in */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hiệu ứng trái tim bay */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #e74c3c;
+    transform: rotate(45deg);
+    animation: float-up 4s linear forwards;
+    z-index: 2;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: -10px;
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 1;
+        transform: rotate(45deg) translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translateY(-100vh) scale(0.5);
+    }
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal-content {
+    background-color: #1a237e;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.4s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .message {
+        font-size: 1.2rem;
+    }
+    
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .memory-card {
+        height: 250px;
+    }
+    
+    .final-message h3 {
+        font-size: 2rem;
+    }
+    
+    .final-message p {
+        font-size: 1.2rem;
+    }
+    
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .message {
+        font-size: 1rem;
+    }
+    
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .memory-card {
+        height: 200px;
+    }
+    
+    .card-back {
+        font-size: 1.2rem;
+    }
+    
+    .final-message h3 {
+        font-size: 1.8rem;
+    }
+    
+    .final-message p {
+        font-size: 1rem;
+    }
+}

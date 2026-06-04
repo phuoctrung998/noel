@@ -1,0 +1,272 @@
+/* Styles for romantic Xmas/NewYear single-page */
+
+:root{
+  --bg-deep:#071026;
+  --warm-red:#d94b4b;
+  --gold:#f2c94c;
+  --leaf:#2ea044;
+  --soft:#fff8f0;
+  --glass: rgba(255,255,255,0.06);
+}
+
+*{box-sizing:border-box}
+html,body,#canvas-wrap{height:100%}
+body{
+  margin:0;
+  font-family: 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, rgba(6,10,28,1) 0%, rgba(17,27,54,1) 60%);
+  color:var(--soft);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* Canvas wrapper covers whole screen for particles & fireworks */
+#canvas-wrap{position:fixed;inset:0;pointer-events:none;z-index:0}
+#fx-canvas{width:100%;height:100%;display:block}
+
+/* Hero */
+.hero{
+  position:relative;
+  z-index:2;
+  padding:6rem 1.5rem 3rem;
+  text-align:center;
+  background: linear-gradient(180deg, rgba(255,240,230,0.02), transparent);
+  backdrop-filter: blur(6px);
+}
+.title{
+  font-family:'Pacifico', cursive;
+  font-size:3.2rem;
+  color:var(--gold);
+  margin:0 0 .4rem;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 12px rgba(242,201,76,0.15);
+}
+.subtitle{margin:0;color:#f7eae0;font-size:1.05rem}
+.controls{margin-top:1rem;display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn{
+  background:linear-gradient(90deg,var(--warm-red),#ff7b7b);
+  border:none;color:white;padding:.6rem 1rem;border-radius:999px;cursor:pointer;
+  box-shadow: 0 8px 18px rgba(217,75,75,0.18);
+  font-weight:600;
+  transition: transform 0.2s ease;
+}
+.btn:hover{
+  transform: scale(1.05);
+}
+.hint{opacity:.85;font-size:.9rem;margin-left:.6rem}
+
+/* Sections */
+.section{padding:4rem 1.25rem;position:relative;z-index:1}
+.section-title{
+  font-family:'Pacifico',cursive;
+  color:var(--soft);
+  font-size:1.8rem;margin:0 0 .6rem;text-align:center;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.lead{text-align:center;margin:0 auto 1.2rem;max-width:640px;color:#eae7e3}
+
+/* Gallery with flip book animation */
+.gallery .grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1.5rem;
+  max-width:1200px;margin:2rem auto 0;padding:0 1rem;
+}
+
+/* Flip card container */
+.card{
+  background:transparent;
+  perspective: 1000px;
+  position: relative;
+  height: 300px;
+}
+
+.card-inner{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-inner{
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+.card-front{
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+
+.card-back{
+  background: linear-gradient(135deg, rgba(217,75,75,0.9), rgba(242,201,76,0.9));
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-back-content{
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.card-back-title{
+  font-family: 'Pacifico', cursive;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-back-text{
+  font-size: 0.9rem;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+.card img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.card:hover img{
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.card figcaption{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding:.7rem .8rem;
+  font-size:.95rem;
+  color:#fff;
+  text-align:center;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,0.7));
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.card:hover figcaption{
+  transform: translateY(0);
+}
+
+/* Scroll reveal animations */
+.scroll-reveal{
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.revealed{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Different reveal animations for variety */
+.scroll-reveal.fade-left{
+  transform: translateX(-50px);
+}
+
+.scroll-reveal.fade-right{
+  transform: translateX(50px);
+}
+
+.scroll-reveal.fade-up{
+  transform: translateY(50px);
+}
+
+.scroll-reveal.fade-down{
+  transform: translateY(-50px);
+}
+
+.scroll-reveal.zoom-in{
+  transform: scale(0.8);
+}
+
+.scroll-reveal.rotate-in{
+  transform: rotate(-10deg) scale(0.9);
+}
+
+/* Staggered animation delays */
+.scroll-reveal.delay-1{ transition-delay: 0.1s; }
+.scroll-reveal.delay-2{ transition-delay: 0.2s; }
+.scroll-reveal.delay-3{ transition-delay: 0.3s; }
+.scroll-reveal.delay-4{ transition-delay: 0.4s; }
+.scroll-reveal.delay-5{ transition-delay: 0.5s; }
+.scroll-reveal.delay-6{ transition-delay: 0.6s; }
+
+/* Footer */
+.footer{padding:3rem 1rem;text-align:center;color:rgba(255,255,255,0.7);background:rgba(0,0,0,0.2)}
+
+/* Floating hearts (click spawn) */
+.floating-hearts{
+  pointer-events:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+}
+.floating-heart{
+  pointer-events:none;
+  position:fixed;
+  width:28px;height:28px;
+  background:radial-gradient(circle at 30% 30%, #fff, transparent 30%), linear-gradient(135deg,#ff6b9c,#ff2d6b);
+  transform:rotate(-45deg) scale(.9);
+  border-radius:50% 50% 50% 50%;
+  animation:heart-rise 2.2s cubic-bezier(.2,-0.2,.25,1);
+  filter:drop-shadow(0 6px 14px rgba(255,40,120,0.18));
+  z-index:101;
+}
+@keyframes heart-rise{
+  0%{opacity:1; transform:translateY(0) rotate(-45deg) scale(1)}
+  70%{opacity:0.9; transform:translateY(-120px) rotate(-45deg) scale(1.05)}
+  100%{opacity:0; transform:translateY(-220px) rotate(-45deg) scale(.8)}
+}
+
+/* Fade-in text utilities */
+.fade-in{opacity:0;transform:translateY(8px);animation:fadeInUp .9s ease forwards}
+.fade-in.delay-1{animation-delay:.5s}
+.fade-in.delay-2{animation-delay:1.0s}
+@keyframes fadeInUp{
+  to{opacity:1;transform:none}
+}
+
+/* Pre-fade class for scroll observer */
+.pre-fade{
+  opacity:0;
+  transform:translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.pre-fade.fade-in{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Responsive tweaks */
+@media (max-width:720px){
+  .title{font-size:2.4rem}
+  .hero{padding:4rem 1rem 2rem}
+  .card{height: 240px;}
+  .gallery .grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+  .controls{flex-direction:column;gap:.8rem}
+  .hint{margin-left:0}
+  .card-back{padding: 1rem;}
+  .card-back-title{font-size: 1rem;}
+  .card-back-text{font-size: 0.85rem;}
+}

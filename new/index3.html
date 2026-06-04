@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Merry Christmas & Happy New Year — Em yêu</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="canvas-wrap">
+    <canvas id="fx-canvas"></canvas>
+  </div>
+
+  <header class="hero">
+    <h1 class="title fade-in">Merry Christmas, em yêu!</h1>
+    <p class="subtitle fade-in delay-1">Chúc em một mùa Noel ấm áp và một năm mới tràn đầy yêu thương.</p>
+    <div class="controls fade-in delay-2">
+      <button id="toggle-snow" class="btn">Tắt / Bật Tuyết</button>
+      <span class="hint">Click bất cứ chỗ nào để xem pháo hoa ✨</span>
+    </div>
+    <div class="floating-hearts" id="hearts-area" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <section id="christmas" class="section section-christmas">
+      <h2 class="section-title scroll-reveal fade-up">Noel lung linh</h2>
+      <p class="lead scroll-reveal fade-up delay-1">Những hạt tuyết nhẹ nhàng rơi, ánh đèn ấm áp — tất cả dành cho em.</p>
+    </section>
+
+    <section id="newyear" class="section section-newyear">
+      <h2 class="section-title scroll-reveal fade-up">Chúc mừng Năm Mới</h2>
+      <p class="lead scroll-reveal fade-up delay-1">Click vào màn hình để bùng nổ pháo hoa — chúc ta một năm mới thật ngọt ngào.</p>
+    </section>
+
+    <section id="gallery" class="section gallery">
+      <h2 class="section-title scroll-reveal zoom-in">Kỷ niệm của chúng ta</h2>
+      <div class="grid">
+        <figure class="card scroll-reveal fade-up delay-1">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/0992272B-8625-44F7-8D7D-B953B74F5A0B.jpg" alt="Kỷ niệm 1">
+              <figcaption>Kỷ niệm 1</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Khoảnh khắc đẹp</div>
+                <div class="card-back-text">Mỗi giây phút bên em đều là điều kỳ diệu ✨</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-right delay-2">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/0EEC6866-52BE-405F-AF71-0FD92EFEE2EA.jpg" alt="Kỷ niệm 2">
+              <figcaption>Kỷ niệm 2</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Nụ cười yêu thương</div>
+                <div class="card-back-text">Nụ cười của em là niềm hạnh phúc của anh 💕</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-left delay-3">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/2AC05393-EC76-4914-95CD-BD03D8E93CDE.jpg" alt="Kỷ niệm 3">
+              <figcaption>Kỷ niệm 3</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Cùng nhau</div>
+                <div class="card-back-text">Bên nhau là nơi ta thuộc về 🌟</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal rotate-in delay-4">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/55D6B27C-1EA5-438E-97F7-DF62B81A823D.jpg" alt="Kỷ niệm 4">
+              <figcaption>Kỷ niệm 4</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Hạnh phúc bình yên</div>
+                <div class="card-back-text">Những khoảnh khắc êm đềm nhất 🌸</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal zoom-in delay-5">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/66437A75-AB0C-45C9-880F-B3055EDA7C7A.jpg" alt="Kỷ niệm 5">
+              <figcaption>Kỷ niệm 5</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Tình yêu mãnh liệt</div>
+                <div class="card-back-text">Anh yêu em nhiều hơn em nghĩ ❤️</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-up delay-6">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/81ABA2CC-3856-4F76-B35B-44D874425712.jpg" alt="Kỷ niệm 6">
+              <figcaption>Kỷ niệm 6</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Ngọt ngào</div>
+                <div class="card-back-text">Mỗi ngày với em đều ngọt như mật 🍯</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-right delay-1">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/A4570185-BA65-487E-B2D8-A337F4CD6EB1.jpg" alt="Kỷ niệm 7">
+              <figcaption>Kỷ niệm 7</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Kỷ niệm vàng</div>
+                <div class="card-back-text">Những ký ức không bao giờ phai 🌈</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-left delay-2">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/CE9C0907-D1A0-4D95-9702-A2A5717B2ED4.jpg" alt="Kỷ niệm 8">
+              <figcaption>Kỷ niệm 8</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Vui vẻ</div>
+                <div class="card-back-text">Tiếng cười của em là giai điệu yêu thích nhất 🎵</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal rotate-in delay-3">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/DF61684A-F106-4E15-944B-21BA26D8A7FB.jpg" alt="Kỷ niệm 9">
+              <figcaption>Kỷ niệm 9</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Mãi mãi bên nhau</div>
+                <div class="card-back-text">Anh muốn giữ em trong vòng tay mãi 💑</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal zoom-in delay-4">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/FD87DB05-C3EA-4578-9285-25C999CACB99.jpg" alt="Kỷ niệm 10">
+              <figcaption>Kỷ niệm 10</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Khoảnh khắc kỳ diệu</div>
+                <div class="card-back-text">Thời gian dừng lại khi bên em ⏰</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-up delay-5">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/IMG_2301.JPG" alt="Kỷ niệm 11">
+              <figcaption>Kỷ niệm 11</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Phép màu tình yêu</div>
+                <div class="card-back-text">Em là phép màu trong đời anh 🌟</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-right delay-6">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/IMG_2381.JPG" alt="Kỷ niệm 12">
+              <figcaption>Kỷ niệm 12</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Hạnh phúc đơn giản</div>
+                <div class="card-back-text">Được ở bên em là điều hạnh phúc nhất 🌺</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal fade-left delay-1">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/IMG_2479.jpg" alt="Kỷ niệm 13">
+              <figcaption>Kỷ niệm 13</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Tình yêu vĩnh cửu</div>
+                <div class="card-back-text">Anh sẽ yêu em đến hơi thở cuối cùng 💖</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+
+        <figure class="card scroll-reveal rotate-in delay-2">
+          <div class="card-inner">
+            <div class="card-front">
+              <img src="images/IMG_2551.jpg" alt="Kỷ niệm 14">
+              <figcaption>Kỷ niệm 14</figcaption>
+            </div>
+            <div class="card-back">
+              <div class="card-back-content">
+                <div class="card-back-title">Mãi yêu em</div>
+                <div class="card-back-text">Em là tình yêu của đời anh ❤️✨</div>
+              </div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Với tất cả tình yêu — Anh ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Women's Day 💖 08/03</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #ff6b9d;
+      --rose: #ff4081;
+      --lilac: #b39ddb;
+      --peach: #ffb3c6;
+      --cream: #fff0f6;
+      --gold: #ffd700;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffe0f0 0%, #fce4ec 30%, #f3e5f5 60%, #e8eaf6 100%);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── Floating petals ─── */
+    .petals-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .petal {
+      position: absolute;
+      top: -60px;
+      font-size: 1.4rem;
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg) scale(1.2); opacity: 0; }
+    }
+
+    /* ─── Floating hearts background ─── */
+    .hearts-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .heart-bg {
+      position: absolute;
+      font-size: 1.1rem;
+      opacity: 0;
+      animation: floatUp ease-in infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      20%  { opacity: 0.5; }
+      100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+    }
+
+    /* ─── Main card ─── */
+    .scene {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 30px 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      box-shadow:
+        0 8px 40px rgba(255,64,129,0.18),
+        0 2px 8px rgba(255,64,129,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 2px solid rgba(255,107,157,0.25);
+      overflow: hidden;
+      animation: cardIn 1s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes cardIn {
+      from { transform: translateY(60px) scale(0.9); opacity: 0; }
+      to   { transform: translateY(0)    scale(1);   opacity: 1; }
+    }
+
+    /* ─── Header banner ─── */
+    .banner {
+      background: linear-gradient(135deg, #ff6b9d, #ff4081, #b39ddb);
+      padding: 40px 32px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .banner-flowers {
+      font-size: 2.4rem;
+      letter-spacing: 6px;
+      margin-bottom: 14px;
+      animation: swing 3s ease-in-out infinite;
+      display: block;
+    }
+    @keyframes swing {
+      0%,100% { transform: rotate(-4deg); }
+      50%      { transform: rotate(4deg); }
+    }
+    .date-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50px;
+      padding: 6px 22px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+      50%      { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+    }
+    .banner h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(255,64,129,0.5), 0 0 40px rgba(255,255,255,0.3);
+      line-height: 1.2;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes titleGlow {
+      from { text-shadow: 0 2px 20px rgba(255,64,129,0.4), 0 0 30px rgba(255,255,255,0.2); }
+      to   { text-shadow: 0 2px 40px rgba(255,100,180,0.8), 0 0 60px rgba(255,255,255,0.5); }
+    }
+    .banner-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      margin-top: 10px;
+    }
+
+    /* ─── Body content ─── */
+    .content {
+      padding: 36px 40px 40px;
+    }
+
+    /* Rose image / emoji cluster */
+    .emoji-cluster {
+      text-align: center;
+      font-size: 3.5rem;
+      margin-bottom: 28px;
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      14%      { transform: scale(1.18); }
+      28%      { transform: scale(1); }
+      42%      { transform: scale(1.10); }
+    }
+
+    /* message */
+    .message {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .message p {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.25rem, 3vw, 1.55rem);
+      color: #c2185b;
+      line-height: 1.9;
+    }
+    .message .highlight {
+      background: linear-gradient(135deg, #ff6b9d, #b39ddb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* ─── Qualities cards ─── */
+    .qualities {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .quality-card {
+      background: linear-gradient(135deg, rgba(255,107,157,0.12), rgba(179,157,219,0.12));
+      border: 1.5px solid rgba(255,107,157,0.25);
+      border-radius: 18px;
+      padding: 18px 12px 16px;
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: default;
+      animation: fadeUp 0.6s both;
+    }
+    .quality-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(255,64,129,0.18);
+    }
+    .quality-card:nth-child(1) { animation-delay: 0.2s; }
+    .quality-card:nth-child(2) { animation-delay: 0.35s; }
+    .quality-card:nth-child(3) { animation-delay: 0.5s; }
+    .quality-card:nth-child(4) { animation-delay: 0.65s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .quality-icon { font-size: 2rem; margin-bottom: 8px; }
+    .quality-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ad1457;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .quality-text {
+      font-size: 0.92rem;
+      color: #880e4f;
+      margin-top: 4px;
+    }
+
+    /* ─── Countdown ─── */
+    .countdown-section {
+      background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(179,157,219,0.15));
+      border-radius: 20px;
+      padding: 22px;
+      text-align: center;
+      border: 1.5px solid rgba(255,107,157,0.2);
+      margin-bottom: 28px;
+    }
+    .countdown-section h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: #c2185b;
+      margin-bottom: 14px;
+    }
+    .countdown-boxes {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .countdown-box {
+      background: linear-gradient(135deg, #ff6b9d, #ff4081);
+      border-radius: 14px;
+      padding: 14px 20px;
+      min-width: 72px;
+      box-shadow: 0 4px 16px rgba(255,64,129,0.3);
+    }
+    .countdown-box .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      display: block;
+    }
+    .countdown-box .lbl {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ─── Wish list ─── */
+    .wishes {
+      margin-bottom: 32px;
+    }
+    .wishes h3 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      color: #c2185b;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .wish-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,107,157,0.18);
+      transition: background 0.2s;
+      animation: fadeUp 0.6s both;
+    }
+    .wish-item:nth-child(1) { animation-delay: 0.7s; }
+    .wish-item:nth-child(2) { animation-delay: 0.85s; }
+    .wish-item:nth-child(3) { animation-delay: 1s; }
+    .wish-item .wi-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .wish-item .wi-text { font-size: 0.97rem; color: #6d1b3b; line-height: 1.5; }
+    .wish-item .wi-text strong { color: #ad1457; }
+
+    /* ─── Signature ─── */
+    .signature {
+      text-align: center;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(255,107,157,0.3);
+    }
+    .signature p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #ad1457;
+    }
+    .signature .hearts-row {
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* ─── Confetti burst on load ─── */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 999;
+      animation: confettiFall 4s ease-in both;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(900deg); opacity: 0; }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 520px) {
+      .content { padding: 24px 22px 30px; }
+      .banner  { padding: 32px 18px 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating petals -->
+  <div class="petals-container" id="petals"></div>
+  <!-- Floating hearts bg -->
+  <div class="hearts-bg" id="heartsBg"></div>
+
+  <div class="scene">
+    <div class="card">
+
+      <!-- Header -->
+      <div class="banner">
+        <span class="banner-flowers">🌸🌺🌷</span>
+        <div class="date-badge">✨ 08 / 03 / 2026 ✨</div>
+        <h1>Happy Women's Day</h1>
+        <p class="banner-subtitle">Chúc mừng ngày của em yêu 💖</p>
+      </div>
+
+      <!-- Body -->
+      <div class="content">
+
+        <div class="emoji-cluster">💐🌹💕🌹💐</div>
+
+        <div class="message">
+          <p>
+            Em là <span class="highlight">người phụ nữ tuyệt vời nhất</span><br/>
+            mà anh từng gặp trong cuộc đời này. 🌙<br/><br/>
+            Nụ cười của em là điều <span class="highlight">làm anh hạnh phúc</span><br/>
+            mỗi một ngày. Anh yêu em rất rất nhiều! 💗
+          </p>
+        </div>
+
+        <!-- Qualities -->
+        <div class="qualities">
+          <div class="quality-card">
+            <div class="quality-icon">🌟</div>
+            <div class="quality-label">Tỏa sáng</div>
+            <div class="quality-text">Rạng rỡ mỗi ngày</div>
+          </div>
+          <div class="quality-card">
+            <div class="quality-icon">💪</div>
+            <div class="quality-label">Mạnh mẽ</div>
+            <div class="quality-text">Vượt qua mọi thử thách</div>
+          </div>
+          <div class="quality-card">
+            <div class="quality-icon">🧠</div>
+            <div class="quality-label">Thông minh</div>
+            <div class="quality-text">Trí tuệ đáng ngưỡng mộ</div>
+          </div>
+          <div class="quality-card">
+            <div class="quality-icon">💖</div>
+            <div class="quality-label">Yêu thương</div>
+            <div class="quality-text">Trái tim ấm áp nhất</div>
+          </div>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown-section">
+          <h3>🎉 Đếm ngược đến ngày 08/03 🎉</h3>
+          <div class="countdown-boxes">
+            <div class="countdown-box">
+              <span class="num" id="cd-hours">00</span>
+              <span class="lbl">Giờ</span>
+            </div>
+            <div class="countdown-box">
+              <span class="num" id="cd-minutes">00</span>
+              <span class="lbl">Phút</span>
+            </div>
+            <div class="countdown-box">
+              <span class="num" id="cd-seconds">00</span>
+              <span class="lbl">Giây</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wish list -->
+        <div class="wishes">
+          <h3>💌 Những điều anh muốn nói với em</h3>
+          <div class="wish-item">
+            <span class="wi-icon">🌹</span>
+            <p class="wi-text"><strong>Cảm ơn em</strong> đã luôn ở bên anh, động viên anh mỗi khi anh gặp khó khăn. Em là chỗ dựa vững chắc nhất của anh.</p>
+          </div>
+          <div class="wish-item">
+            <span class="wi-icon">✨</span>
+            <p class="wi-text"><strong>Chúc em</strong> luôn rạng rỡ, khỏe mạnh, vui vẻ và thành công trên mọi con đường em chọn.</p>
+          </div>
+          <div class="wish-item">
+            <span class="wi-icon">💑</span>
+            <p class="wi-text"><strong>Hứa với em</strong> anh sẽ luôn ở đây, nắm tay em đi qua tất cả mọi khoảnh khắc trong cuộc sống. Mãi mãi nhé! 💍</p>
+          </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature">
+          <p>With all my love, always & forever 💌</p>
+          <span class="hearts-row">💖💕❤️💕💖</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ── Floating petals ── */
+    const petalEmojis = ['🌸','🌺','🌷','🌼','🍀','✿','❀','💮'];
+    const petalsCont  = document.getElementById('petals');
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+      p.style.left        = `${Math.random() * 100}vw`;
+      p.style.fontSize    = `${0.9 + Math.random() * 1.4}rem`;
+      p.style.animationDuration  = `${5 + Math.random() * 8}s`;
+      p.style.animationDelay     = `${Math.random() * 10}s`;
+      petalsCont.appendChild(p);
+    }
+
+    /* ── Floating hearts ── */
+    const heartSymbols = ['💖','💗','💕','💓','❤️','🩷'];
+    const heartsBg = document.getElementById('heartsBg');
+    for (let i = 0; i < 20; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart-bg';
+      h.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      h.style.left   = `${Math.random() * 100}vw`;
+      h.style.bottom = `${Math.random() * -20}vh`;
+      h.style.fontSize = `${0.7 + Math.random() * 1.2}rem`;
+      h.style.animationDuration = `${6 + Math.random() * 9}s`;
+      h.style.animationDelay    = `${Math.random() * 12}s`;
+      heartsBg.appendChild(h);
+    }
+
+    /* ── Confetti burst on load ── */
+    const confettiColors = ['#ff6b9d','#ff4081','#b39ddb','#ffd700','#80cbc4','#ffb3c6'];
+    function launchConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        c.style.left = `${10 + Math.random() * 80}vw`;
+        c.style.top  = `${-10}px`;
+        c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        c.style.width  = `${6 + Math.random() * 8}px`;
+        c.style.height = `${6 + Math.random() * 8}px`;
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        c.style.animationDuration = `${2.5 + Math.random() * 3}s`;
+        c.style.animationDelay    = `${Math.random() * 1.5}s`;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 6000);
+      }
+    }
+    launchConfetti();
+    setTimeout(launchConfetti, 3000);
+
+    /* ── Countdown to 08/03/2026 00:00:00 +07 ── */
+    function updateCountdown() {
+      const target = new Date('2026-03-08T00:00:00+07:00');
+      const now    = new Date();
+      let diff     = target - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-hours').textContent   = '00';
+        document.getElementById('cd-minutes').textContent = '00';
+        document.getElementById('cd-seconds').textContent = '00';
+        document.querySelector('.countdown-section h3').textContent = '🎊 Happy Women\'s Day! 🎊';
+        launchConfetti();
+        return;
+      }
+
+      const hours   = Math.floor(diff / 3_600_000);
+      diff         -= hours   * 3_600_000;
+      const minutes = Math.floor(diff / 60_000);
+      diff         -= minutes * 60_000;
+      const seconds = Math.floor(diff / 1_000);
+
+      document.getElementById('cd-hours').textContent   = String(hours).padStart(2,'0');
+      document.getElementById('cd-minutes').textContent = String(minutes).padStart(2,'0');
+      document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ── Click-to-heart effect on the whole page ── */
+    const heartPop = ['💖','💗','💕','✨','🌸','🌹'];
+    document.addEventListener('click', e => {
+      for (let i = 0; i < 5; i++) {
+        const el = document.createElement('div');
+        el.style.cssText = `
+          position:fixed; left:${e.clientX}px; top:${e.clientY}px;
+          font-size:${1 + Math.random()}rem; pointer-events:none;
+          z-index:9999; animation:popUp 1s ease both;
+          transform-origin: center bottom;
+        `;
+        el.textContent = heartPop[Math.floor(Math.random() * heartPop.length)];
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1100);
+      }
+    });
+
+    const popStyle = document.createElement('style');
+    popStyle.textContent = `
+      @keyframes popUp {
+        0%   { transform: translate(-50%,-50%) scale(0.5); opacity:1; }
+        100% { transform: translate(${-50 + (Math.random()*60-30)}%, ${-150 - Math.random()*60}%) scale(1.4); opacity:0; }
+      }
+    `;
+    document.head.appendChild(popStyle);
+  </script>
+</body>
+</html>

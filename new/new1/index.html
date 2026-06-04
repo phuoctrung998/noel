@@ -1,0 +1,181 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas & Happy New Year</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Phần chào mừng Noel -->
+    <section class="christmas-section" id="christmas">
+        <div class="snow-container"></div>
+        <div class="content">
+            <h1 class="title">Merry Christmas</h1>
+            <p class="subtitle">Gửi đến em yêu của anh</p>
+            <div class="message fade-in">
+                <p>Giáng sinh này, anh chỉ ước một điều đơn giản:</p>
+                <p>Được ôm em trong vòng tay, sưởi ấm trái tim anh.</p>
+            </div>
+            <div class="ornament">
+                <div class="ornament-ball"></div>
+                <div class="ornament-ball"></div>
+                <div class="ornament-ball"></div>
+            </div>
+            <button class="scroll-btn" onclick="scrollToNewYear()">Tiếp tục hành trình →</button>
+        </div>
+    </section>
+
+    <!-- Phần chào mừng Năm Mới -->
+    <section class="newyear-section" id="newyear">
+        <div class="fireworks-container"></div>
+        <div class="content">
+            <h1 class="title">Happy New Year</h1>
+            <p class="subtitle">Năm mới hạnh phúc bên nhau</p>
+            <div class="message fade-in">
+                <p>Năm mới đến, anh mong mọi điều tốt đẹp nhất sẽ đến với em.</p>
+                <p>Cảm ơn em vì đã là một phần tuyệt vời trong cuộc sống của anh.</p>
+            </div>
+            <button class="scroll-btn" onclick="scrollToGallery()">Xem kỷ niệm của chúng ta →</button>
+        </div>
+    </section>
+
+    <!-- Phần Gallery ảnh kỷ niệm -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="gallery-title">Kỷ niệm đẹp của chúng ta</h2>
+        <p class="gallery-subtitle">Click vào mỗi bức ảnh để đọc thông điệp đặc biệt</p>
+        
+        <div class="gallery-container">
+            <div class="memory-card" data-message="Ngày đầu tiên chúng ta gặp nhau, anh đã biết em chính là người đặc biệt.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n1.jpg" alt="Kỷ niệm 1">
+                    </div>
+                    <div class="card-back">
+                        <p>Ngày đầu tiên</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Nụ cười của em luôn làm trái tim anh rung động.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n2.jpg" alt="Kỷ niệm 2">
+                    </div>
+                    <div class="card-back">
+                        <p>Nụ cười rạng rỡ</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Bữa tiệc sinh nhật đầu tiên anh tổ chức cho em.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n3.jpg" alt="Kỷ niệm 3">
+                    </div>
+                    <div class="card-back">
+                        <p>Sinh nhật đáng nhớ</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Chuyến đi chơi đầu tiên của chúng ta, đầy kỷ niệm.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n4.jpg" alt="Kỷ niệm 4">
+                    </div>
+                    <div class="card-back">
+                        <p>Chuyến đi đầu tiên</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Khoảnh khắc em ngủ ngon bên cạnh anh.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n5.jpg" alt="Kỷ niệm 5">
+                    </div>
+                    <div class="card-back">
+                        <p>Khoảnh khắc bình yên</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Lần đầu tiên chúng tay nhau đi dạo dưới mưa.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n6.jpg" alt="Kỷ niệm 6">
+                    </div>
+                    <div class="card-back">
+                        <p>Dưới cơn mưa</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Bữa tối lãng mạn anh dành riêng cho em.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n7.jpg" alt="Kỷ niệm 7">
+                    </div>
+                    <div class="card-back">
+                        <p>Bữa tối lãng mạn</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Kỷ niệm về ngày Valentine đầu tiên của chúng ta.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n8.jpg" alt="Kỷ niệm 8">
+                    </div>
+                    <div class="card-back">
+                        <p>Ngày Valentine</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Chúng ta đã cùng nhau vượt qua mọi khó khăn.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n9.jpg" alt="Kỷ niệm 9">
+                    </div>
+                    <div class="card-back">
+                        <p>Vượt qua thử thách</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memory-card" data-message="Và đây, chúng ta đang cùng nhau chào đón một năm mới hạnh phúc.">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="n10.jpg" alt="Kỷ niệm 10">
+                    </div>
+                    <div class="card-back">
+                        <p>Chào đón năm mới</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="final-message fade-in">
+            <h3>Merry Christmas, em yêu! Chúc năm mới hạnh phúc bên anh.</h3>
+            <p>Cảm ơn em vì đã là ánh sáng trong cuộc đời anh.</p>
+        </div>
+    </section>
+
+    <!-- Container cho trái tim bay -->
+    <div class="hearts-container"></div>
+    
+    <!-- Modal để hiển thị thông điệp khi click vào ảnh -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

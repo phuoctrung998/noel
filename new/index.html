@@ -4,21 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Merry Christmas & Happy New Year — Em yêu</title>
-
-    <link
-      rel="icon"
-      type="image/png"
-      href="/images/lookMe.jpg"
-    />
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Animation Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <style>
       :root {
         --bg-deep: #071026;
@@ -892,7 +881,7 @@
         opacity: 0;
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
         z-index: 5;
-        will-change: transform, opacity;
+        transition: all 0.6s ease;
       }
 
       .mystery-box.show-full-image .box-image {
@@ -901,18 +890,18 @@
         left: 50% !important;
         right: auto !important;
         bottom: auto !important;
-        margin: 0 !important;
-        width: auto !important;
-        height: auto !important;
-        max-width: 80vw !important;
-        max-height: 80vh !important;
-        z-index: 10001 !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+        width: auto;
+        height: auto;
+        max-width: 80vw;
+        max-height: 80vh;
+        opacity: 1;
+        z-index: 10000;
         border-radius: 20px;
-        border: 6px solid var(--gold);
-        object-fit: contain !important;
-        will-change: transform, opacity, filter;
-        transform-origin: center center !important;
-        image-rendering: crisp-edges;
+        box-shadow: 0 0 60px rgba(242, 201, 76, 0.8),
+                    0 0 120px rgba(217, 75, 75, 0.6);
+        border: 5px solid var(--gold);
+        object-fit: contain;
       }
 
       .mystery-box.show-small-image .box-image {
@@ -956,54 +945,16 @@
       .mystery-box-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.92);
+        background: rgba(0, 0, 0, 0.85);
         z-index: 9999;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s ease;
-        backdrop-filter: blur(8px);
+        transition: opacity 0.3s ease;
       }
 
       .mystery-box-overlay.show {
         opacity: 1;
         pointer-events: all;
-      }
-
-      /* Puzzle piece fragments for animation effect */
-      .puzzle-fragment {
-        position: fixed;
-        z-index: 9998;
-        pointer-events: none;
-        opacity: 0;
-        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      }
-
-      .puzzle-fragment.active {
-        opacity: 1;
-      }
-
-      /* Magic sparkle effect */
-      .magic-sparkle {
-        position: fixed;
-        width: 4px;
-        height: 4px;
-        background: white;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 10001;
-        box-shadow: 0 0 10px currentColor;
-        animation: sparkleFloat 1.5s ease-out forwards;
-      }
-
-      @keyframes sparkleFloat {
-        0% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100px) scale(0);
-          opacity: 0;
-        }
       }
 
       @keyframes boxOpen {
@@ -1018,73 +969,6 @@
         100% {
           transform: scale(0) rotate(360deg);
           opacity: 0;
-        }
-      }
-
-      @keyframes puzzleAssemble {
-        0% {
-          clip-path: polygon(
-            0% 0%, 25% 0%, 25% 25%, 0% 25%,
-            25% 0%, 50% 0%, 50% 25%, 25% 25%,
-            50% 0%, 75% 0%, 75% 25%, 50% 25%,
-            75% 0%, 100% 0%, 100% 25%, 75% 25%,
-            0% 25%, 25% 25%, 25% 50%, 0% 50%,
-            25% 25%, 50% 25%, 50% 50%, 25% 50%,
-            50% 25%, 75% 25%, 75% 50%, 50% 50%,
-            75% 25%, 100% 25%, 100% 50%, 75% 50%,
-            0% 50%, 25% 50%, 25% 75%, 0% 75%,
-            25% 50%, 50% 50%, 50% 75%, 25% 75%,
-            50% 50%, 75% 50%, 75% 75%, 50% 75%,
-            75% 50%, 100% 50%, 100% 75%, 75% 75%,
-            0% 75%, 25% 75%, 25% 100%, 0% 100%,
-            25% 75%, 50% 75%, 50% 100%, 25% 100%,
-            50% 75%, 75% 75%, 75% 100%, 50% 100%,
-            75% 75%, 100% 75%, 100% 100%, 75% 100%
-          );
-          filter: brightness(0.3) blur(15px) saturate(0.5);
-          transform: translate(-50%, -50%) scale(0.2) rotate(-270deg);
-          opacity: 0;
-        }
-        15% {
-          opacity: 1;
-          filter: brightness(0.6) blur(8px) saturate(0.8);
-          transform: translate(-50%, -50%) scale(0.5) rotate(-180deg);
-        }
-        35% {
-          clip-path: polygon(
-            0% 0%, 33% 0%, 33% 33%, 0% 33%,
-            33% 0%, 67% 0%, 67% 33%, 33% 33%,
-            67% 0%, 100% 0%, 100% 33%, 67% 33%,
-            0% 33%, 33% 33%, 33% 67%, 0% 67%,
-            33% 33%, 67% 33%, 67% 67%, 33% 67%,
-            67% 33%, 100% 33%, 100% 67%, 67% 67%,
-            0% 67%, 33% 67%, 33% 100%, 0% 100%,
-            33% 67%, 67% 67%, 67% 100%, 33% 100%,
-            67% 67%, 100% 67%, 100% 100%, 67% 100%
-          );
-          transform: translate(-50%, -50%) scale(0.7) rotate(-90deg);
-          filter: brightness(0.85) blur(4px) saturate(1);
-        }
-        55% {
-          clip-path: polygon(
-            0% 0%, 50% 0%, 50% 50%, 0% 50%,
-            50% 0%, 100% 0%, 100% 50%, 50% 50%,
-            0% 50%, 50% 50%, 50% 100%, 0% 100%,
-            50% 50%, 100% 50%, 100% 100%, 50% 100%
-          );
-          transform: translate(-50%, -50%) scale(0.92) rotate(-30deg);
-          filter: brightness(1.05) blur(1px) saturate(1.2);
-        }
-        80% {
-          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-          transform: translate(-50%, -50%) scale(1.08) rotate(5deg);
-          filter: brightness(1.15) blur(0px) saturate(1.3);
-        }
-        100% {
-          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-          transform: translate(-50%, -50%) scale(1) rotate(0deg);
-          filter: brightness(1) blur(0px) saturate(1);
-          opacity: 1;
         }
       }
 
@@ -1108,19 +992,6 @@
         100% {
           transform: translate(-50%, -50%) scale(0);
           opacity: 0;
-        }
-      }
-
-      @keyframes puzzleShine {
-        0%, 100% {
-          box-shadow: 0 0 60px rgba(242, 201, 76, 0.8),
-                      0 0 120px rgba(217, 75, 75, 0.6),
-                      0 0 180px rgba(242, 201, 76, 0.4);
-        }
-        50% {
-          box-shadow: 0 0 80px rgba(242, 201, 76, 1),
-                      0 0 150px rgba(217, 75, 75, 0.8),
-                      0 0 220px rgba(242, 201, 76, 0.6);
         }
       }
 
@@ -1944,7 +1815,7 @@
         const volumeUp = document.getElementById("volume-up");
 
         let isMusicPlaying = false;
-        bgMusic.volume = 0.1; // 50% volume
+        bgMusic.volume = 0.1; // 10% volume
 
         // Auto play music on page load
         function autoPlayMusic() {
@@ -2368,43 +2239,6 @@
             }, 800);
           });
 
-        // Create magical particles around element with GSAP
-        function createMagicParticles(element) {
-          const rect = element.getBoundingClientRect();
-          const particleCount = 35;
-          
-          for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = Math.random() * 10 + 5 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.borderRadius = '50%';
-            particle.style.background = `rgba(${Math.random() > 0.5 ? '242, 201, 76' : '217, 75, 75'}, ${Math.random() * 0.4 + 0.6})`;
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '10002';
-            particle.style.boxShadow = '0 0 15px currentColor';
-            
-            const angle = (i / particleCount) * Math.PI * 2;
-            const distance = Math.min(rect.width, rect.height) / 2 + 40;
-            particle.style.left = rect.left + rect.width / 2 + 'px';
-            particle.style.top = rect.top + rect.height / 2 + 'px';
-            
-            document.body.appendChild(particle);
-            
-            // GSAP animation - much smoother
-            gsap.to(particle, {
-              x: Math.cos(angle) * (250 + Math.random() * 100),
-              y: Math.sin(angle) * (250 + Math.random() * 100),
-              scale: 0,
-              opacity: 0,
-              rotation: Math.random() * 720 - 360,
-              duration: 1.5 + Math.random() * 0.5,
-              ease: "power3.out",
-              onComplete: () => particle.remove()
-            });
-          }
-        }
-
         // Mystery Boxes
         const mysteryBoxOverlay = document.createElement('div');
         mysteryBoxOverlay.className = 'mystery-box-overlay';
@@ -2418,159 +2252,43 @@
               const imageSrc = this.dataset.image;
               const boxImage = this.querySelector(".box-image");
               const boxBack = this.querySelector(".box-back");
-              const boxElement = this;
 
               // Set image source
               boxImage.src = imageSrc;
 
               // Step 1: Open box animation (0.8s)
               setTimeout(() => {
-                // Show overlay first
+                // Step 2: Show overlay and zoom image to half screen (3s)
                 // mysteryBoxOverlay.classList.add('show');
-                
-                // Then add positioning class
-                setTimeout(() => {
-                  boxElement.classList.add('show-full-image');
-                  
-                  // Force layout recalculation
-                  void boxImage.offsetHeight;
+                this.classList.add('show-full-image');
 
-                  // GSAP Timeline for smooth animation
-                  const tl = gsap.timeline({
-                    defaults: {
-                      ease: "power3.out"
-                    }
-                  });
-
-                  // Initial state - ensure centered
-                  gsap.set(boxImage, {
-                    opacity: 0,
-                    scale: 0.1,
-                    rotation: -180,
-                    filter: 'blur(20px) brightness(0.3)',
-                    clipPath: 'polygon(0% 0%, 25% 0%, 25% 25%, 0% 25%, 25% 0%, 50% 0%, 50% 25%, 25% 25%, 50% 0%, 75% 0%, 75% 25%, 50% 25%, 75% 0%, 100% 0%, 100% 25%, 75% 25%, 0% 25%, 25% 25%, 25% 50%, 0% 50%, 25% 25%, 50% 25%, 50% 50%, 25% 50%, 50% 25%, 75% 25%, 75% 50%, 50% 50%, 75% 25%, 100% 25%, 100% 50%, 75% 50%, 0% 50%, 25% 50%, 25% 75%, 0% 75%, 25% 50%, 50% 50%, 50% 75%, 25% 75%, 50% 50%, 75% 50%, 75% 75%, 50% 75%, 75% 50%, 100% 50%, 100% 75%, 75% 75%, 0% 75%, 25% 75%, 25% 100%, 0% 100%, 25% 75%, 50% 75%, 50% 100%, 25% 100%, 50% 75%, 75% 75%, 75% 100%, 50% 100%, 75% 75%, 100% 75%, 100% 100%, 75% 100%)'
-                  });
-
-                  // Stage 1: Fade in and start assembling (16 pieces)
-                  tl.to(boxImage, {
-                    opacity: 1,
-                    scale: 0.4,
-                    rotation: -90,
-                    filter: 'blur(12px) brightness(0.5)',
-                    duration: 0.5,
-                    ease: "power2.out"
-                  })
-                  
-                  // Stage 2: Continue assembling (9 pieces)
-                  .to(boxImage, {
-                    scale: 0.7,
-                    rotation: -45,
-                    filter: 'blur(6px) brightness(0.7)',
-                    clipPath: 'polygon(0% 0%, 33% 0%, 33% 33%, 0% 33%, 33% 0%, 67% 0%, 67% 33%, 33% 33%, 67% 0%, 100% 0%, 100% 33%, 67% 33%, 0% 33%, 33% 33%, 33% 67%, 0% 67%, 33% 33%, 67% 33%, 67% 67%, 33% 67%, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 0% 67%, 33% 67%, 33% 100%, 0% 100%, 33% 67%, 67% 67%, 67% 100%, 33% 100%, 67% 67%, 100% 67%, 100% 100%, 67% 100%)',
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                  })
-                  
-                  // Stage 3: Almost complete (4 pieces)
-                  .to(boxImage, {
-                    scale: 0.9,
-                    rotation: -15,
-                    filter: 'blur(3px) brightness(0.85)',
-                    clipPath: 'polygon(0% 0%, 50% 0%, 50% 50%, 0% 50%, 50% 0%, 100% 0%, 100% 50%, 50% 50%, 0% 50%, 50% 50%, 50% 100%, 0% 100%, 50% 50%, 100% 50%, 100% 100%, 50% 100%)',
-                    duration: 0.4,
-                    ease: "power2.inOut"
-                  })
-                  
-                  // Stage 4: Complete with bounce
-                  .to(boxImage, {
-                    scale: 1.05,
-                    rotation: 0,
-                    filter: 'blur(0px) brightness(1)',
-                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                    duration: 0.5,
-                    ease: "back.out(1.7)"
-                  })
-                  
-                  // Stage 5: Settle to final size
-                  .to(boxImage, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                      // Create particles
-                      createMagicParticles(boxImage);
-                      
-                      // Continuous particle stream
-                      const particleInterval = setInterval(() => {
-                        if (boxElement.classList.contains('show-full-image')) {
-                          createMagicParticles(boxImage);
-                        } else {
-                          clearInterval(particleInterval);
-                        }
-                      }, 900);
-
-                      // Continuous glow animation
-                      gsap.to(boxImage, {
-                        boxShadow: '0 0 100px rgba(242, 201, 76, 1), 0 0 180px rgba(217, 75, 75, 0.8), 0 0 250px rgba(242, 201, 76, 0.6)',
-                        duration: 1.5,
-                        yoyo: true,
-                        repeat: -1,
-                        ease: "sine.inOut"
-                      });
-                    }
-                  });
-
-                  // Set initial box shadow
-                  gsap.to(boxImage, {
-                    boxShadow: '0 0 60px rgba(242, 201, 76, 0.8), 0 0 120px rgba(217, 75, 75, 0.6), 0 0 180px rgba(242, 201, 76, 0.4)',
-                    duration: 0.1
-                  });
-
-                  // Create fireworks during animation
-                  for (let i = 0; i < 15; i++) {
-                    setTimeout(() => {
-                      createFirework(Math.random() * W, Math.random() * H * 0.7);
-                    }, i * 150);
-                  }
-
-                  // Hide after 3.5s
+                // Create fireworks during zoom
+                for (let i = 0; i < 15; i++) {
                   setTimeout(() => {
-                    gsap.killTweensOf(boxImage);
-                    
-                    gsap.to(boxImage, {
-                      opacity: 0,
-                      scale: 0.7,
-                      rotation: 90,
-                      duration: 0.6,
-                      ease: "power2.in",
-                      onComplete: () => {
-                        boxElement.classList.remove('show-full-image');
-                        mysteryBoxOverlay.classList.remove('show');
-                        
-                        // Reset
-                        gsap.set(boxImage, {
-                          opacity: 0,
-                          scale: 0,
-                          rotation: 0,
-                          clearProps: "all"
-                        });
-                        
-                        // Show message
-                        setTimeout(() => {
-                          boxBack.textContent = message;
-                          boxElement.classList.add('show-message');
+                    createFirework(Math.random() * W, Math.random() * H * 0.7);
+                  }, i * 150);
+                }
 
-                          setTimeout(() => {
-                            boxElement.classList.remove('show-message');
-                            setTimeout(() => {
-                              boxElement.classList.add('show-small-image');
-                            }, 300);
-                          }, 3000);
-                        }, 300);
-                      }
-                    });
-                  }, 3500);
-                }, 100);
+                // Step 3: After 3s, hide full image and show message
+                setTimeout(() => {
+                  this.classList.remove('show-full-image');
+                  mysteryBoxOverlay.classList.remove('show');
+                  
+                  // Show message
+                  setTimeout(() => {
+                    boxBack.textContent = message;
+                    this.classList.add('show-message');
+
+                    // Step 4: After 3s, hide message and show small image in box
+                    setTimeout(() => {
+                      this.classList.remove('show-message');
+                      
+                      setTimeout(() => {
+                        this.classList.add('show-small-image');
+                      }, 300);
+                    }, 3000);
+                  }, 300);
+                }, 3000);
               }, 800);
 
               createFirework(
