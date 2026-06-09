@@ -1,1503 +1,2419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1 Year Anniversary 🌸 — Phước Trung & Anh Thư</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
-    :root {
-      --cream:   #FFF8F0;
-      --blush:   #FBDCE2;
-      --rose:    #F4A7B9;
-      --dusty:   #E8869A;
-      --gold:    #D4A843;
-      --gold-lt: #F0D080;
-      --beige:   #F5ECD7;
-      --text:    #5C3D2E;
-      --text-lt: #9E7B6B;
-      --white:   #FFFFFF;
-      --shadow:  rgba(212,168,67,.18);
-    }
-
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Lato', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-size: 16px;
-      line-height: 1.65;
-    }
-
-    /* ============================================================
-       PARTICLES CANVAS
-    ============================================================ */
-    #particles-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ============================================================
-       MUSIC PLAYER – Enhanced
-    ============================================================ */
-    #music-player {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(16px);
-      border: 1.5px solid var(--blush);
-      border-radius: 50px;
-      padding: 8px 18px 8px 8px;
-      box-shadow: 0 4px 28px var(--shadow);
-      transition: box-shadow .3s;
-      max-width: calc(100vw - 48px);
-    }
-    #music-player:hover { box-shadow: 0 8px 40px rgba(212,168,67,.32); }
-    #play-btn {
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--rose), var(--dusty));
-      border: none;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 18px;
-      transition: transform .2s, box-shadow .2s;
-      flex-shrink: 0;
-    }
-    #play-btn:hover { transform: scale(1.12); box-shadow: 0 4px 20px rgba(232,134,154,.55); }
-    #play-btn.playing { animation: pulseBtn 2s ease-in-out infinite; }
-    @keyframes pulseBtn {
-      0%,100% { box-shadow: 0 4px 16px rgba(232,134,154,.4); }
-      50%     { box-shadow: 0 4px 28px rgba(232,134,154,.85), 0 0 0 7px rgba(244,167,185,.18); }
-    }
-    .player-info { display: flex; flex-direction: column; min-width: 0; }
-    .player-title { font-size: 12px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
-    .player-sub   { font-size: 10px; color: var(--text-lt); }
-    .music-wave { display: flex; align-items: flex-end; gap: 2px; height: 20px; }
-    .music-wave span {
-      display: block; width: 3px; border-radius: 2px;
-      background: linear-gradient(to top, var(--dusty), var(--rose));
-      animation: wave 1s ease-in-out infinite;
-    }
-    .music-wave span:nth-child(1){ height: 6px;  animation-delay: 0s; }
-    .music-wave span:nth-child(2){ height: 14px; animation-delay: .15s; }
-    .music-wave span:nth-child(3){ height: 10px; animation-delay: .3s; }
-    .music-wave span:nth-child(4){ height: 16px; animation-delay: .05s; }
-    .music-wave span:nth-child(5){ height: 8px;  animation-delay: .25s; }
-    .music-wave.paused span { animation-play-state: paused; }
-    @keyframes wave {
-      0%,100% { transform: scaleY(1); }
-      50%     { transform: scaleY(.35); }
-    }
-
-    /* ============================================================
-       HERO SECTION
-    ============================================================ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 20px 60px;
-      background: linear-gradient(160deg, #FFF0F5 0%, #FFF8F0 40%, #FDEBD0 100%);
-      z-index: 1;
-      overflow: hidden;
-    }
-    .hero-deco-top {
-      position: absolute; top: 0; left: 0; right: 0; height: 6px;
-      background: linear-gradient(90deg, var(--blush), var(--gold-lt), var(--rose), var(--gold-lt), var(--blush));
-    }
-
-    /* Hero Photo */
-    .photo-frame-wrapper {
-      position: relative;
-      width: min(260px, 68vw);
-      margin-bottom: 32px;
-      z-index: 5;
-    }
-    .photo-frame {
-      width: 100%;
-      aspect-ratio: 3/4;
-      border-radius: 24px;
-      object-fit: cover;
-      object-position: center top;
-      border: 5px solid var(--white);
-      box-shadow: 0 8px 44px rgba(212,168,67,.3), 0 2px 10px rgba(0,0,0,.08);
-      display: block;
-      cursor: pointer;
-      transition: transform .35s, box-shadow .35s;
-      image-orientation: from-image;
-    }
-    .photo-frame:hover { transform: scale(1.03); box-shadow: 0 14px 56px rgba(212,168,67,.42); }
-    .photo-corner {
-      position: absolute;
-      width: 40px; height: 40px;
-      background: var(--gold-lt);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 2px 8px var(--shadow);
-      z-index: 6;
-    }
-    .photo-corner.tl { top: -12px; left: -12px; }
-    .photo-corner.tr { top: -12px; right: -12px; }
-    .photo-corner.bl { bottom: -12px; left: -12px; }
-    .photo-corner.br { bottom: -12px; right: -12px; }
-
-    /* Hero text */
-    .hero-subtitle {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(15px, 4vw, 19px);
-      color: var(--dusty);
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 9vw, 72px);
-      color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 8px;
-    }
-    .hero-title em { color: var(--dusty); font-style: italic; }
-    .hero-names {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(22px, 5vw, 30px);
-      color: var(--gold);
-      margin-bottom: 36px;
-    }
-
-    /* ============================================================
-       COUNTDOWN
-    ============================================================ */
-    .countdown-wrap {
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1.5px solid var(--blush);
-      padding: 22px 36px;
-      display: inline-flex;
-      gap: 24px;
-      box-shadow: 0 4px 28px var(--shadow);
-      margin-bottom: 16px;
-    }
-    .cd-item { text-align: center; }
-    .cd-num {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(30px, 7vw, 52px);
-      font-weight: 700;
-      color: var(--dusty);
-      line-height: 1;
-    }
-    .cd-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-lt);
-      margin-top: 4px;
-    }
-    .cd-sep { font-size: 32px; color: var(--rose); align-self: center; margin-top: -8px; }
-    .countdown-msg {
-      font-size: 15px;
-      color: var(--text-lt);
-      margin-bottom: 32px;
-      font-style: italic;
-      padding: 0 20px;
-      line-height: 1.7;
-    }
-
-    /* Surprise photos are JS-created fixed elements — no CSS class needed */
-
-    /* ============================================================
-       FLOATING MINI PHOTOS – drift around viewport edges
-    ============================================================ */
-    .float-photo {
-      position: fixed;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid rgba(255,255,255,.88);
-      box-shadow: 0 4px 18px rgba(0,0,0,.16);
-      z-index: 50;
-      cursor: pointer;
-      transition: transform .35s ease, box-shadow .35s ease;
-    }
-    .float-photo:hover {
-      transform: scale(1.2) !important;
-      box-shadow: 0 8px 30px rgba(212,168,67,.5) !important;
-    }
-    .float-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      image-orientation: from-image;
-      pointer-events: none;
-    }
-    @keyframes drift1 {
-      0%,100% { transform: translate(0,0) rotate(0deg); }
-      25%     { transform: translate(14px,-18px) rotate(4deg); }
-      50%     { transform: translate(-8px,-30px) rotate(-3deg); }
-      75%     { transform: translate(18px,-14px) rotate(6deg); }
-    }
-    @keyframes drift2 {
-      0%,100% { transform: translate(0,0) rotate(0deg); }
-      30%     { transform: translate(-16px,-14px) rotate(-5deg); }
-      60%     { transform: translate(10px,-28px) rotate(3deg); }
-      85%     { transform: translate(-6px,-10px) rotate(-2deg); }
-    }
-    @keyframes drift3 {
-      0%,100% { transform: translate(0,0) rotate(0deg); }
-      20%     { transform: translate(10px,-22px) rotate(3deg); }
-      55%     { transform: translate(-14px,-15px) rotate(-4deg); }
-      80%     { transform: translate(8px,-8px) rotate(5deg); }
-    }
-    @keyframes drift4 {
-      0%,100% { transform: translate(0,0) rotate(0deg); }
-      35%     { transform: translate(-12px,-20px) rotate(-6deg); }
-      65%     { transform: translate(16px,-10px) rotate(4deg); }
-    }
-    @keyframes drift5 {
-      0%,100% { transform: translate(0,0) rotate(0deg); }
-      40%     { transform: translate(20px,-14px) rotate(5deg); }
-      70%     { transform: translate(-10px,-24px) rotate(-4deg); }
-    }
-
-    /* ============================================================
-       LIGHTBOX
-    ============================================================ */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 600;
-      background: rgba(8,0,4,.88);
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-    }
-    #lightbox.active { display: flex; }
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 12px 64px rgba(0,0,0,.6);
-      animation: lbIn .28s ease;
-      cursor: default;
-      image-orientation: from-image;
-    }
-    @keyframes lbIn {
-      from { opacity: 0; transform: scale(.86); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    #lightbox-close {
-      position: absolute;
-      top: 20px; right: 24px;
-      background: rgba(255,255,255,.12);
-      border: 1.5px solid rgba(255,255,255,.25);
-      border-radius: 50%;
-      width: 50px; height: 50px;
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background .2s, transform .2s;
-    }
-    #lightbox-close:hover { background: rgba(255,255,255,.28); transform: scale(1.1); }
-
-    /* ============================================================
-       SECTION SHARED
-    ============================================================ */
-    section { position: relative; z-index: 1; }
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 70px 24px;
-    }
-    .section-label {
-      font-family: 'Dancing Script', cursive;
-      font-size: 19px;
-      color: var(--dusty);
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 6vw, 42px);
-      text-align: center;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-    .section-divider {
-      width: 60px; height: 3px;
-      background: linear-gradient(90deg, var(--rose), var(--gold));
-      border-radius: 2px;
-      margin: 0 auto 48px;
-    }
-
-    /* ============================================================
-       LOVE JOURNEY (Timeline)
-    ============================================================ */
-    #journey { background: linear-gradient(to bottom, var(--cream), var(--beige)); }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%; top: 20px; bottom: 20px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--rose), var(--gold-lt));
-      transform: translateX(-50%);
-    }
-    .tl-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 14px 0;
-      position: relative;
-    }
-    .tl-item:nth-child(odd) { flex-direction: row-reverse; }
-    .tl-item:nth-child(odd) .tl-card { text-align: right; }
-    .tl-dot {
-      position: absolute;
-      left: 50%; transform: translateX(-50%);
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 3px solid var(--rose);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 2px 14px var(--shadow);
-      z-index: 2;
-      flex-shrink: 0;
-    }
-    .tl-card {
-      flex: 1;
-      background: var(--white);
-      border-radius: 18px;
-      padding: 0 0 16px;
-      overflow: hidden;
-      display: flex; flex-direction: column;
-      box-shadow: 0 4px 20px var(--shadow);
-      border: 1px solid var(--blush);
-      max-width: calc(50% - 42px);
-      gap: 0;
-    }
-    /* Timeline thumbnail fills the card top */
-    .tl-thumb {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      cursor: pointer;
-      transition: transform .3s;
-      image-orientation: from-image;
-      margin-bottom: 12px;
-    }
-    .tl-thumb:hover { transform: scale(1.04); }
-    .tl-card-body { padding: 0 18px; display: flex; flex-direction: column; gap: 4px; }
-    .tl-date  { font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
-    .tl-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--text); }
-    .tl-desc  { font-size: 13px; color: var(--text-lt); line-height: 1.7; }
-
-    /* ============================================================
-       GIFT BOXES
-    ============================================================ */
-    #gifts { background: linear-gradient(to bottom, var(--beige), #FFF8F5); }
-    .gifts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
-    }
-    .gift-box { perspective: 900px; cursor: pointer; }
-    .gift-inner {
-      position: relative;
-      border-radius: 24px;
-      overflow: visible;
-      transition: transform .3s, filter .4s;
-    }
-    .gift-box:hover .gift-inner { transform: translateY(-6px); }
-    .gift-box.opened .gift-inner { filter: drop-shadow(0 0 14px rgba(244,167,185,.45)); }
-
-    /* Closed state */
-    .gift-closed {
-      background: var(--white);
-      border-radius: 24px;
-      border: 2px solid var(--blush);
-      box-shadow: 0 6px 28px var(--shadow);
-      padding: 32px 20px 28px;
-      text-align: center;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      transition: border-color .3s, box-shadow .3s;
-      position: relative;
-    }
-    .gift-box:not(.opened):hover .gift-closed {
-      border-color: var(--rose);
-      box-shadow: 0 12px 44px rgba(232,134,154,.3);
-    }
-
-    /* Lid with 3D flip on open */
-    .gift-lid-wrap { perspective: 400px; }
-    .gift-lid {
-      width: 80px; height: 80px;
-      border-radius: 18px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px;
-      transform-origin: center bottom;
-      will-change: transform;
-      transition: box-shadow .3s;
-    }
-    .gift-box:not(.opened):hover .gift-lid {
-      box-shadow: 0 8px 24px rgba(244,167,185,.4);
-    }
-    .gift-closed-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: var(--text);
-    }
-    .gift-closed-hint { font-size: 12px; color: var(--text-lt); font-style: italic; }
-    .gift-ribbon {
-      position: absolute;
-      top: -1px; left: 50%; transform: translateX(-50%);
-      width: 3px; height: 26px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      border-radius: 2px;
-    }
-    .gift-bow {
-      position: absolute;
-      top: -14px; left: 50%; transform: translateX(-50%);
-      font-size: 24px;
-    }
-
-    /* Glow ring on hover */
-    .gift-closed::after {
-      content: '';
-      position: absolute; inset: -3px;
-      border-radius: 26px;
-      border: 2px solid transparent;
-      transition: border-color .3s, box-shadow .3s;
-    }
-    .gift-box:not(.opened):hover .gift-closed::after {
-      border-color: rgba(244,167,185,.5);
-      box-shadow: 0 0 22px rgba(244,167,185,.28);
-    }
-
-    /* Opened state */
-    .gift-opened-content {
-      display: none;
-      background: linear-gradient(135deg, var(--white), #FFF5F8);
-      border-radius: 24px;
-      border: 2px solid var(--rose);
-      box-shadow: 0 10px 44px rgba(244,167,185,.3);
-      overflow: hidden;
-    }
-    /* Image area: fills width, consistent height, image shown fully */
-    .gift-img-area {
-      width: 100%;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--blush), var(--beige));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px;
-    }
-    .gift-img-area img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      cursor: pointer;
-      transition: transform .35s;
-      image-orientation: from-image;
-      display: block;
-    }
-    .gift-img-area img:hover { transform: scale(1.06); }
-    .gift-content-body { padding: 20px 22px; }
-    .gift-opened-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 19px;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .gift-message {
-      font-size: 14px;
-      color: var(--text-lt);
-      line-height: 1.8;
-      margin-bottom: 18px;
-      font-style: italic;
-    }
-    .gift-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn-accept {
-      flex: 1;
-      padding: 12px 14px;
-      border: none; border-radius: 50px;
-      background: linear-gradient(135deg, var(--rose), var(--dusty));
-      color: #fff; font-size: 14px; font-weight: 700;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s;
-      font-family: 'Lato', sans-serif;
-    }
-    .btn-accept:hover { transform: scale(1.05); box-shadow: 0 6px 22px rgba(232,134,154,.55); }
-    .btn-later {
-      flex: 1;
-      padding: 12px 14px;
-      border: 2px solid var(--blush); border-radius: 50px;
-      background: transparent;
-      color: var(--text-lt); font-size: 14px;
-      cursor: pointer;
-      transition: border-color .2s, color .2s, background .2s;
-      font-family: 'Lato', sans-serif;
-    }
-    .btn-later:hover { border-color: var(--rose); color: var(--dusty); background: rgba(244,167,185,.07); }
-    .gift-accepted-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: linear-gradient(135deg, #d4edda, #c3e6cb);
-      color: #2d6a4f;
-      border-radius: 50px;
-      padding: 10px 18px;
-      font-size: 13px; font-weight: 700;
-    }
-
-    /* Shimmer overlay on open */
-    .gift-shimmer {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,.88) 0%, transparent 70%);
-      border-radius: 24px;
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    /* Lock badge */
-    .lock-badge {
-      position: absolute; top: 12px; right: 12px;
-      background: var(--gold-lt); border-radius: 50%;
-      width: 30px; height: 30px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px;
-      box-shadow: 0 2px 8px var(--shadow);
-      z-index: 5;
-    }
-
-    /* ============================================================
-       LOVE NOTE SECTION
-    ============================================================ */
-    #love-note {
-      background: linear-gradient(135deg, #FFF0F5, var(--beige));
-      text-align: center;
-    }
-    .love-note-card {
-      max-width: 580px;
-      margin: 0 auto;
-      background: var(--white);
-      border-radius: 28px;
-      padding: 52px 44px;
-      border: 2px solid var(--blush);
-      box-shadow: 0 8px 44px var(--shadow);
-      position: relative; overflow: hidden;
-    }
-    .love-note-card::before {
-      content: '❝';
-      position: absolute; top: 16px; left: 24px;
-      font-size: 72px; color: var(--blush);
-      font-family: 'Playfair Display', serif;
-      line-height: 1;
-    }
-    .love-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(16px, 3.5vw, 21px);
-      line-height: 1.85;
-      color: var(--text);
-      font-style: italic;
-      margin-bottom: 24px;
-      position: relative; z-index: 1;
-    }
-    .love-sign { font-family: 'Dancing Script', cursive; font-size: 24px; color: var(--dusty); }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      text-align: center;
-      padding: 28px 24px;
-      background: var(--beige);
-      font-size: 13px;
-      color: var(--text-lt);
-      position: relative; z-index: 1;
-    }
-    footer span { color: var(--dusty); }
-
-    /* Burst overlay */
-    #open-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      z-index: 200; pointer-events: none;
-    }
-    #open-overlay canvas { width: 100%; height: 100%; display: block; }
-
-    /* Floating emojis in hero */
-    .emoji-float {
-      position: absolute;
-      font-size: 22px;
-      animation: floatUp 6s ease-in-out infinite;
-      opacity: .6;
-      pointer-events: none;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg); opacity: .6; }
-      50%  { opacity: .9; }
-      100% { transform: translateY(-65px) rotate(15deg); opacity: 0; }
-    }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 600px) {
-      .countdown-wrap { gap: 12px; padding: 18px 22px; }
-      .cd-sep { display: none; }
-      .timeline::before { left: 18px; }
-      .tl-item, .tl-item:nth-child(odd) { flex-direction: row; }
-      .tl-item:nth-child(odd) .tl-card { text-align: left; }
-      .tl-dot { left: 18px; }
-      .tl-card { max-width: calc(100% - 64px); margin-left: 64px; }
-      .tl-item:nth-child(odd) .tl-card { margin-left: 64px; }
-      .gifts-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-      #music-player { bottom: 14px; right: 14px; }
-      .love-note-card { padding: 32px 22px; }
-      .float-photo { display: none; }
-    }
-    @media (max-width: 400px) {
-      .gifts-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh lớn">
-  <button id="lightbox-close" aria-label="Đóng">✕</button>
-  <img id="lightbox-img" src="" alt="Ảnh lớn" />
-</div>
-
-<!-- FLOATING MINI PHOTOS (JS-populated) -->
-<div id="float-photos-container"></div>
-
-<!-- PARTICLES -->
-<canvas id="particles-canvas"></canvas>
-
-<!-- BURST OVERLAY for gift box opening -->
-<div id="open-overlay"><canvas id="burst-canvas"></canvas></div>
-
-<!-- ============================================================
-     MUSIC PLAYER
-============================================================ -->
-<div id="music-player">
-  <button id="play-btn" title="Phát/Dừng nhạc" aria-label="Phát hoặc dừng nhạc">▶</button>
-  <div class="player-info">
-    <span class="player-title">🎵 Nhạc Của Chúng Mình</span>
-    <span class="player-sub">Nhạc nền lãng mạn ♡</span>
-  </div>
-  <div class="music-wave paused" id="music-wave">
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
-</div>
-
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ============================================================
-     HERO SECTION
-============================================================ -->
-<section id="hero">
-  <div class="hero-deco-top"></div>
-
-  <!-- Floating emojis -->
-  <span class="emoji-float" style="left:5%;top:15%;animation-delay:0s;z-index:4;">🌸</span>
-  <span class="emoji-float" style="left:88%;top:20%;animation-delay:1.5s;z-index:4;">🌷</span>
-  <span class="emoji-float" style="left:12%;top:70%;animation-delay:3s;z-index:4;">💖</span>
-  <span class="emoji-float" style="left:80%;top:65%;animation-delay:2s;z-index:4;">✨</span>
-  <span class="emoji-float" style="left:50%;top:10%;animation-delay:.7s;z-index:4;">🦋</span>
-
-  <!-- Couple Photo – click to lightbox -->
-  <div class="photo-frame-wrapper" id="hero-photo">
-    <img
-      src="anni_images/special.jpeg"
-      alt="Ảnh đôi mình"
-      class="photo-frame"
-      onclick="openLightbox(this.src)"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1 Năm Anniversary — Phước Trung & Anh Thư</title>
+    <meta
+      name="description"
+      content="Trang kỷ niệm 1 năm yêu nhau — Phước Trung & Anh Thư"
     />
-    <div class="photo-corner tl">🌸</div>
-    <div class="photo-corner tr">💛</div>
-    <div class="photo-corner bl">💖</div>
-    <div class="photo-corner br">🌸</div>
-  </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      :root {
+        --cream: #fdf6ee;
+        --blush: #f9d5dc;
+        --rose: #e8879c;
+        --dusty: #c96b7e;
+        --gold: #c89838;
+        --gold-lt: #e8c468;
+        --beige: #f2e6d0;
+        --text: #3d2214;
+        --text-lt: #8a6250;
+        --white: #fffcf8;
+        --shadow: rgba(160, 90, 60, 0.13);
+        --shadow-rose: rgba(200, 107, 126, 0.2);
+      }
 
-  <!-- Hero Text -->
-  <p class="hero-subtitle">~ One year to remember ~</p>
-  <h1 class="hero-title">1 Year<br><em>Anniversary</em></h1>
-  <p class="hero-names">Phước Trung ♡ Anh Thư</p>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: var(--cream);
+        color: var(--text);
+        min-height: 100dvh;
+        overflow-x: hidden;
+        font-size: 15px;
+        line-height: 1.7;
+      }
 
-  <!-- Countdown to 21/06/2026 -->
-  <div class="countdown-wrap">
-    <div class="cd-item"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Ngày</div></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Giờ</div></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Phút</div></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Giây</div></div>
-  </div>
-  <p class="countdown-msg" id="countdown-msg">Đang đếm ngược... 🌸</p>
-</section>
+      /* subtle grain */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -50%;
+        z-index: 300;
+        pointer-events: none;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        background-size: 180px 180px;
+      }
 
-<!-- ============================================================
-     LOVE JOURNEY SECTION
-============================================================ -->
-<section id="journey">
-  <div class="section-inner">
-    <p class="section-label">Hành trình của chúng mình</p>
-    <h2 class="section-title">Our Love Story</h2>
-    <div class="section-divider"></div>
+      /* ── PARTICLES ── */
+      #particles-canvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-    <div class="timeline">
+      /* ── MUSIC PLAYER ── */
+      #music-player {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        z-index: 400;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 252, 248, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--blush);
+        border-radius: 50px;
+        padding: 7px 16px 7px 7px;
+        box-shadow:
+          0 4px 24px var(--shadow),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        transition: box-shadow 0.3s;
+        max-width: calc(100vw - 44px);
+      }
+      #music-player:hover {
+        box-shadow:
+          0 8px 36px var(--shadow-rose),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+      #play-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--rose), var(--dusty));
+        border: none;
+        cursor: pointer;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 16px;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      #play-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 18px var(--shadow-rose);
+      }
+      #play-btn:active {
+        transform: scale(0.97);
+      }
+      #play-btn.playing {
+        animation: pulseBtn 2s ease-in-out infinite;
+      }
+      @keyframes pulseBtn {
+        0%,
+        100% {
+          box-shadow: 0 3px 14px var(--shadow-rose);
+        }
+        50% {
+          box-shadow:
+            0 3px 24px rgba(200, 107, 126, 0.65),
+            0 0 0 6px rgba(232, 135, 156, 0.14);
+        }
+      }
+      .player-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .player-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 130px;
+      }
+      .player-sub {
+        font-size: 10px;
+        color: var(--text-lt);
+      }
+      .music-wave {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 18px;
+      }
+      .music-wave span {
+        display: block;
+        width: 3px;
+        border-radius: 2px;
+        background: linear-gradient(to top, var(--dusty), var(--rose));
+        animation: wave 1s ease-in-out infinite;
+      }
+      .music-wave span:nth-child(1) {
+        height: 5px;
+        animation-delay: 0s;
+      }
+      .music-wave span:nth-child(2) {
+        height: 13px;
+        animation-delay: 0.15s;
+      }
+      .music-wave span:nth-child(3) {
+        height: 9px;
+        animation-delay: 0.3s;
+      }
+      .music-wave span:nth-child(4) {
+        height: 15px;
+        animation-delay: 0.05s;
+      }
+      .music-wave span:nth-child(5) {
+        height: 7px;
+        animation-delay: 0.25s;
+      }
+      .music-wave.paused span {
+        animation-play-state: paused;
+      }
+      @keyframes wave {
+        0%,
+        100% {
+          transform: scaleY(1);
+        }
+        50% {
+          transform: scaleY(0.28);
+        }
+      }
 
-      <div class="tl-item">
-        <div class="tl-dot">💬</div>
-        <div class="tl-card">
-          <img src="anni_images/n23.jpg" alt="Lần đầu gặp nhau" class="tl-thumb" onclick="openLightbox(this.src)" />
-          <div class="tl-card-body">
-            <div class="tl-date">Tháng 6, 2025</div>
-            <div class="tl-title">Lần đầu gặp nhau</div>
-            <div class="tl-desc">Cái nhìn đầu tiên, nụ cười đầu tiên... Anh biết Anh Thư là người đặc biệt.</div>
-          </div>
-        </div>
-      </div>
+      /* ── HERO ── */
+      #hero {
+        position: relative;
+        min-height: 100dvh;
+        z-index: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 24px 64px;
+        background:
+          radial-gradient(
+            ellipse 80% 60% at 18% 8%,
+            rgba(249, 213, 220, 0.5) 0%,
+            transparent 58%
+          ),
+          radial-gradient(
+            ellipse 60% 50% at 82% 92%,
+            rgba(242, 230, 208, 0.65) 0%,
+            transparent 55%
+          ),
+          linear-gradient(165deg, #fff0f4 0%, #fdf6ee 45%, #f9edd8 100%);
+      }
+      .hero-deco-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--blush),
+          var(--gold-lt),
+          var(--rose),
+          var(--gold-lt),
+          var(--blush)
+        );
+      }
 
-      <div class="tl-item">
-        <div class="tl-dot">☕</div>
-        <div class="tl-card">
-          <img src="anni_images/n24.jpg" alt="Buổi hẹn cafe đầu tiên" class="tl-thumb" onclick="openLightbox(this.src)" />
-          <div class="tl-card-body">
-            <div class="tl-date">Tháng 6, 2025</div>
-            <div class="tl-title">Buổi hẹn cafe đầu tiên</div>
-            <div class="tl-desc">Anh Thư làm tim anh đập loạn khi cầm ly cà phê và cười với anh như vậy.</div>
-          </div>
-        </div>
-      </div>
+      .photo-frame-wrapper {
+        position: relative;
+        width: min(240px, 62vw);
+        margin-bottom: 28px;
+        z-index: 5;
+      }
+      .photo-frame {
+        width: 100%;
+        aspect-ratio: 3/4;
+        border-radius: 20px;
+        object-fit: cover;
+        object-position: center top;
+        border: 4px solid var(--white);
+        box-shadow:
+          0 12px 48px var(--shadow-rose),
+          0 2px 8px rgba(0, 0, 0, 0.06);
+        display: block;
+        cursor: pointer;
+        image-orientation: from-image;
+        transition:
+          transform 0.35s,
+          box-shadow 0.35s;
+      }
+      .photo-frame:hover {
+        transform: scale(1.03) rotate(0.4deg);
+        box-shadow: 0 18px 60px var(--shadow-rose);
+      }
+      .photo-corner {
+        position: absolute;
+        width: 36px;
+        height: 36px;
+        background: var(--gold-lt);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 2px 8px var(--shadow);
+        z-index: 6;
+      }
+      .photo-corner.tl {
+        top: -10px;
+        left: -10px;
+      }
+      .photo-corner.tr {
+        top: -10px;
+        right: -10px;
+      }
+      .photo-corner.bl {
+        bottom: -10px;
+        left: -10px;
+      }
+      .photo-corner.br {
+        bottom: -10px;
+        right: -10px;
+      }
 
-      <div class="tl-item">
-        <div class="tl-dot">🌸</div>
-        <div class="tl-card">
-          <img src="anni_images/sn.jpeg" alt="Chính thức bên nhau" class="tl-thumb" onclick="openLightbox(this.src)" />
-          <div class="tl-card-body">
-            <div class="tl-date">21/06/2025</div>
-            <div class="tl-title">Chính thức bên nhau</div>
-            <div class="tl-desc">Ngày anh run rẩy hỏi Anh Thư, và em đã đồng ý – ngày đẹp nhất đời anh.</div>
-          </div>
-        </div>
-      </div>
+      .hero-greeting {
+        font-family: "Dancing Script", cursive;
+        font-weight: 700;
+        font-size: clamp(16px, 4.5vw, 22px);
+        color: var(--dusty);
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+      }
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: clamp(44px, 11vw, 82px);
+        color: var(--text);
+        line-height: 1.08;
+        margin-bottom: 6px;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+      .hero-title em {
+        color: var(--dusty);
+        font-style: italic;
+      }
+      .hero-names {
+        font-family: "Dancing Script", cursive;
+        font-weight: 700;
+        font-size: clamp(18px, 4.5vw, 26px);
+        color: var(--gold);
+        margin-bottom: 32px;
+      }
 
-      <div class="tl-item">
-        <div class="tl-dot">🎂</div>
-        <div class="tl-card">
-          <img src="anni_images/n28.jpg" alt="1 Năm Hạnh Phúc" class="tl-thumb" onclick="openLightbox(this.src)" />
-          <div class="tl-card-body">
-            <div class="tl-date">21/06/2026</div>
-            <div class="tl-title">1 Năm Hạnh Phúc 🎉</div>
-            <div class="tl-desc">Một năm bên Anh Thư, mỗi ngày đều là ký ức anh muốn giữ mãi mãi.</div>
-          </div>
-        </div>
-      </div>
+      /* ── COUNTDOWN ── */
+      .countdown-wrap {
+        background: rgba(255, 252, 248, 0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 18px;
+        border: 1px solid var(--blush);
+        padding: 18px 32px;
+        display: inline-flex;
+        gap: 20px;
+        box-shadow:
+          0 4px 24px var(--shadow),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        margin-bottom: 14px;
+      }
+      .cd-item {
+        text-align: center;
+      }
+      .cd-num {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 700;
+        font-size: clamp(28px, 7vw, 50px);
+        color: var(--dusty);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .cd-label {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--text-lt);
+        margin-top: 3px;
+        font-weight: 600;
+      }
+      .cd-sep {
+        font-size: 28px;
+        color: var(--rose);
+        align-self: center;
+        margin-top: -6px;
+        opacity: 0.55;
+      }
+      .countdown-msg {
+        font-size: 14px;
+        color: var(--text-lt);
+        font-style: italic;
+        padding: 0 16px;
+        line-height: 1.7;
+      }
 
+      .emoji-float {
+        position: absolute;
+        font-size: 20px;
+        pointer-events: none;
+        opacity: 0.5;
+        animation: floatUp 7s ease-in-out infinite;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0);
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 0.78;
+        }
+        100% {
+          transform: translateY(-60px) rotate(12deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── FLOATING MINI PHOTOS ── */
+      .float-photo {
+        position: fixed;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid rgba(255, 252, 248, 0.9);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+        z-index: 50;
+        cursor: pointer;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .float-photo:hover {
+        transform: scale(1.18) !important;
+        box-shadow: 0 8px 28px var(--shadow-rose) !important;
+      }
+      .float-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        image-orientation: from-image;
+        pointer-events: none;
+      }
+      @keyframes drift1 {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0);
+        }
+        25% {
+          transform: translate(12px, -16px) rotate(4deg);
+        }
+        50% {
+          transform: translate(-7px, -28px) rotate(-3deg);
+        }
+        75% {
+          transform: translate(16px, -12px) rotate(5deg);
+        }
+      }
+      @keyframes drift2 {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0);
+        }
+        30% {
+          transform: translate(-14px, -12px) rotate(-5deg);
+        }
+        60% {
+          transform: translate(9px, -26px) rotate(3deg);
+        }
+        85% {
+          transform: translate(-5px, -9px) rotate(-2deg);
+        }
+      }
+      @keyframes drift3 {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0);
+        }
+        20% {
+          transform: translate(9px, -20px) rotate(3deg);
+        }
+        55% {
+          transform: translate(-12px, -13px) rotate(-4deg);
+        }
+        80% {
+          transform: translate(7px, -7px) rotate(5deg);
+        }
+      }
+      @keyframes drift4 {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0);
+        }
+        35% {
+          transform: translate(-11px, -18px) rotate(-6deg);
+        }
+        65% {
+          transform: translate(14px, -9px) rotate(4deg);
+        }
+      }
+      @keyframes drift5 {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0);
+        }
+        40% {
+          transform: translate(18px, -12px) rotate(5deg);
+        }
+        70% {
+          transform: translate(-9px, -22px) rotate(-4deg);
+        }
+      }
+
+      /* ── LIGHTBOX ── */
+      #lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 600;
+        background: rgba(10, 4, 2, 0.9);
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+      }
+      #lightbox.active {
+        display: flex;
+      }
+      #lightbox img {
+        max-width: 92vw;
+        max-height: 88vh;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 16px 72px rgba(0, 0, 0, 0.65);
+        animation: lbIn 0.28s ease;
+        cursor: default;
+        image-orientation: from-image;
+      }
+      @keyframes lbIn {
+        from {
+          opacity: 0;
+          transform: scale(0.88);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      #lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 22px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      #lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.08);
+      }
+
+      /* ── SECTIONS SHARED ── */
+      section {
+        position: relative;
+        z-index: 1;
+      }
+      .section-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 72px 24px;
+      }
+      .section-label {
+        font-family: "Dancing Script", cursive;
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--dusty);
+        text-align: center;
+        margin-bottom: 6px;
+      }
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: clamp(26px, 5.5vw, 40px);
+        text-align: center;
+        color: var(--text);
+        margin-bottom: 10px;
+        letter-spacing: -0.01em;
+        text-wrap: balance;
+      }
+      .section-divider {
+        width: 48px;
+        height: 2.5px;
+        background: linear-gradient(90deg, var(--rose), var(--gold));
+        border-radius: 2px;
+        margin: 0 auto 48px;
+      }
+
+      /* ── TIMELINE ── */
+      #journey {
+        background: linear-gradient(to bottom, var(--cream), var(--beige));
+      }
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        max-width: 620px;
+        margin: 0 auto;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 24px;
+        bottom: 24px;
+        width: 1.5px;
+        background: linear-gradient(to bottom, var(--rose), transparent 90%);
+        transform: translateX(-50%);
+      }
+      .tl-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 12px 0;
+        position: relative;
+      }
+      .tl-item:nth-child(odd) {
+        flex-direction: row-reverse;
+      }
+      .tl-item:nth-child(odd) .tl-card {
+        text-align: right;
+      }
+      .tl-dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 2px solid var(--rose);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        box-shadow: 0 2px 12px var(--shadow);
+        z-index: 2;
+        flex-shrink: 0;
+      }
+      .tl-card {
+        flex: 1;
+        background: var(--white);
+        border-radius: 16px;
+        padding: 0 0 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 3px 18px var(--shadow);
+        border: 1px solid rgba(249, 213, 220, 0.6);
+        max-width: calc(50% - 38px);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .tl-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px var(--shadow-rose);
+      }
+      .tl-thumb {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        cursor: pointer;
+        transition: transform 0.3s;
+        image-orientation: from-image;
+        margin-bottom: 10px;
+      }
+      .tl-thumb:hover {
+        transform: scale(1.04);
+      }
+      .tl-card-body {
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .tl-date {
+        font-size: 9px;
+        letter-spacing: 0.14em;
+        color: var(--gold);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .tl-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 15px;
+        color: var(--text);
+        font-weight: 600;
+      }
+      .tl-desc {
+        font-size: 12px;
+        color: var(--text-lt);
+        line-height: 1.75;
+      }
+
+      /* ── FUN PHOTOS ── */
+      #fun-section {
+        background: linear-gradient(to bottom, var(--beige), #fff2f5);
+        text-align: center;
+      }
+      .fun-frame-pair {
+        position: relative;
+        width: min(260px, 66vw);
+        margin: 0 auto;
+        aspect-ratio: 3/4;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 12px 48px var(--shadow-rose);
+        border: 4px solid var(--white);
+        cursor: pointer;
+      }
+      .fun-img-layer {
+        position: absolute;
+        inset: 0;
+        transition: opacity 0.85s ease;
+      }
+      .fun-img-layer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        image-orientation: from-image;
+        display: block;
+      }
+      .fun-img-layer.visible {
+        opacity: 1;
+      }
+      .fun-img-layer.hidden {
+        opacity: 0;
+      }
+      .fun-caption {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--text-lt);
+        font-style: italic;
+        transition: opacity 0.45s ease;
+      }
+
+      /* ── SPECIAL MOMENTS ── */
+      #special-section {
+        background: linear-gradient(to bottom, #fff2f5, var(--beige));
+      }
+      .special-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+      .special-card {
+        background: var(--white);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px var(--shadow);
+        border: 1px solid rgba(249, 213, 220, 0.5);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .special-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 38px var(--shadow-rose);
+      }
+      .special-photo {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        cursor: pointer;
+        transition: transform 0.3s;
+        image-orientation: from-image;
+      }
+      .special-photo:hover {
+        transform: scale(1.04);
+      }
+      .special-card-body {
+        padding: 16px 18px 20px;
+      }
+      .special-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: linear-gradient(
+          135deg,
+          var(--blush),
+          rgba(232, 135, 156, 0.14)
+        );
+        color: var(--dusty);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 50px;
+        margin-bottom: 8px;
+      }
+      .special-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: 17px;
+        color: var(--text);
+        margin-bottom: 5px;
+        line-height: 1.3;
+      }
+      .special-card-desc {
+        font-size: 12px;
+        color: var(--text-lt);
+        line-height: 1.75;
+      }
+
+      /* ── GIFT BOXES ── */
+      #gifts {
+        background: linear-gradient(to bottom, var(--beige), #fff6f2);
+      }
+      .gifts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 24px;
+      }
+      .gift-box {
+        perspective: 900px;
+        cursor: pointer;
+      }
+      .gift-inner {
+        position: relative;
+        border-radius: 22px;
+        overflow: visible;
+        transition:
+          transform 0.3s,
+          filter 0.4s;
+      }
+      .gift-box:hover .gift-inner {
+        transform: translateY(-5px);
+      }
+      .gift-box.opened .gift-inner {
+        filter: drop-shadow(0 0 12px rgba(232, 135, 156, 0.35));
+      }
+      .gift-closed {
+        background: var(--white);
+        border-radius: 22px;
+        border: 1.5px solid var(--blush);
+        box-shadow: 0 5px 24px var(--shadow);
+        padding: 28px 18px 24px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+        position: relative;
+      }
+      .gift-box:not(.opened):hover .gift-closed {
+        border-color: var(--rose);
+        box-shadow: 0 10px 38px var(--shadow-rose);
+      }
+      .gift-lid-wrap {
+        perspective: 400px;
+      }
+      .gift-lid {
+        width: 74px;
+        height: 74px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        transform-origin: center bottom;
+        will-change: transform;
+        transition: box-shadow 0.3s;
+      }
+      .gift-box:not(.opened):hover .gift-lid {
+        box-shadow: 0 6px 20px var(--shadow-rose);
+      }
+      .gift-closed-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 17px;
+        color: var(--text);
+        font-weight: 600;
+      }
+      .gift-closed-hint {
+        font-size: 11px;
+        color: var(--text-lt);
+        font-style: italic;
+      }
+      .gift-ribbon {
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2.5px;
+        height: 22px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+        border-radius: 2px;
+      }
+      .gift-bow {
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 22px;
+      }
+      .gift-closed::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 24px;
+        border: 1.5px solid transparent;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .gift-box:not(.opened):hover .gift-closed::after {
+        border-color: rgba(232, 135, 156, 0.42);
+        box-shadow: 0 0 18px rgba(232, 135, 156, 0.2);
+      }
+      .gift-opened-content {
+        display: none;
+        background: linear-gradient(135deg, var(--white), #fff4f7);
+        border-radius: 22px;
+        border: 1.5px solid var(--rose);
+        box-shadow: 0 8px 38px var(--shadow-rose);
+        overflow: hidden;
+      }
+      .gift-img-area {
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--blush), var(--beige));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+      }
+      .gift-img-area img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        cursor: pointer;
+        transition: transform 0.35s;
+        image-orientation: from-image;
+        display: block;
+      }
+      .gift-img-area img:hover {
+        transform: scale(1.06);
+      }
+      .gift-content-body {
+        padding: 18px 20px;
+      }
+      .gift-opened-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+        color: var(--text);
+        font-weight: 600;
+        margin-bottom: 9px;
+      }
+      .gift-message {
+        font-size: 13px;
+        color: var(--text-lt);
+        line-height: 1.85;
+        margin-bottom: 16px;
+        font-style: italic;
+      }
+      .gift-actions {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+      .btn-accept {
+        flex: 1;
+        padding: 11px 13px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(135deg, var(--rose), var(--dusty));
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .btn-accept:hover {
+        transform: scale(1.04);
+        box-shadow: 0 5px 18px var(--shadow-rose);
+      }
+      .btn-accept:active {
+        transform: scale(0.97);
+      }
+      .btn-later {
+        flex: 1;
+        padding: 11px 13px;
+        border: 1.5px solid var(--blush);
+        border-radius: 50px;
+        background: transparent;
+        color: var(--text-lt);
+        font-size: 13px;
+        cursor: pointer;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        transition:
+          border-color 0.2s,
+          color 0.2s,
+          background 0.2s;
+      }
+      .btn-later:hover {
+        border-color: var(--rose);
+        color: var(--dusty);
+        background: rgba(232, 135, 156, 0.06);
+      }
+      .gift-accepted-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        color: #2d6a4f;
+        border-radius: 50px;
+        padding: 9px 16px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .gift-shimmer {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 255, 255, 0.85) 0%,
+          transparent 70%
+        );
+        border-radius: 22px;
+        pointer-events: none;
+        opacity: 0;
+      }
+      .lock-badge {
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        background: var(--gold-lt);
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        box-shadow: 0 2px 8px var(--shadow);
+        z-index: 5;
+      }
+
+      /* ── LOVE NOTE ── */
+      #love-note {
+        background: linear-gradient(135deg, #fff0f5, var(--beige));
+        text-align: center;
+      }
+      .love-note-card {
+        max-width: 560px;
+        margin: 0 auto;
+        background: var(--white);
+        border-radius: 26px;
+        padding: 50px 42px;
+        border: 1.5px solid var(--blush);
+        box-shadow: 0 8px 40px var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+      .love-note-card::before {
+        content: "❝";
+        position: absolute;
+        top: 10px;
+        left: 18px;
+        font-size: 64px;
+        color: var(--blush);
+        font-family: "Cormorant Garamond", serif;
+        line-height: 1;
+      }
+      .love-quote {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(15px, 3.2vw, 20px);
+        line-height: 1.9;
+        color: var(--text);
+        font-style: italic;
+        margin-bottom: 22px;
+        position: relative;
+        z-index: 1;
+        text-wrap: pretty;
+      }
+      .love-sign {
+        font-family: "Dancing Script", cursive;
+        font-size: 22px;
+        color: var(--dusty);
+        font-weight: 700;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        text-align: center;
+        padding: 26px 24px;
+        background: var(--beige);
+        font-size: 12px;
+        color: var(--text-lt);
+        position: relative;
+        z-index: 1;
+      }
+      footer span {
+        color: var(--dusty);
+      }
+
+      /* burst overlay */
+      #open-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        pointer-events: none;
+      }
+      #open-overlay canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /* scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-d1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-d2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-d3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-d4 {
+        transition-delay: 0.4s;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 600px) {
+        .countdown-wrap {
+          gap: 10px;
+          padding: 14px 18px;
+        }
+        .cd-sep {
+          display: none;
+        }
+        .timeline::before {
+          left: 16px;
+        }
+        .tl-item,
+        .tl-item:nth-child(odd) {
+          flex-direction: row;
+        }
+        .tl-item:nth-child(odd) .tl-card {
+          text-align: left;
+        }
+        .tl-dot {
+          left: 16px;
+        }
+        .tl-card {
+          max-width: calc(100% - 58px);
+          margin-left: 58px;
+        }
+        .tl-item:nth-child(odd) .tl-card {
+          margin-left: 58px;
+        }
+        .special-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .gifts-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+        #music-player {
+          bottom: 12px;
+          right: 12px;
+        }
+        .love-note-card {
+          padding: 30px 20px;
+        }
+        .float-photo {
+          display: none;
+        }
+      }
+      @media (max-width: 380px) {
+        .gifts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh lớn">
+      <button id="lightbox-close" aria-label="Đóng">✕</button>
+      <img id="lightbox-img" src="" alt="Ảnh kỷ niệm" />
     </div>
-  </div>
-</section>
 
-<!-- ============================================================
-     GIFT BOXES SECTION
-============================================================ -->
-<section id="gifts">
-  <div class="section-inner">
-    <p class="section-label">Dành riêng cho Anh Thư 🎁</p>
-    <h2 class="section-title">Kho Báu Hẹn Hò</h2>
-    <div class="section-divider"></div>
-    <p style="text-align:center;color:var(--text-lt);font-size:14px;margin-top:-32px;margin-bottom:36px;font-style:italic;line-height:1.7;">
-      Mỗi hộp là một hẹn hò bí mật – Hãy mở và chọn nhé, Anh Thư! 🔓
-    </p>
+    <div id="float-photos-container"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div id="open-overlay"><canvas id="burst-canvas"></canvas></div>
 
-    <div class="gifts-grid">
-
-      <!-- BOX 0: Xem phim -->
-      <div class="gift-box" id="box-0" onclick="openBox(0)">
-        <div class="gift-inner">
-          <div class="gift-closed" id="closed-0">
-            <div class="gift-bow">🎀</div>
-            <div class="gift-ribbon"></div>
-            <div class="gift-lid-wrap">
-              <div class="gift-lid" id="lid-0" style="background:linear-gradient(135deg,#FBDCE2,#F4A7B9);">🎬</div>
-            </div>
-            <div class="gift-closed-title">Hộp Số 1</div>
-            <div class="gift-closed-hint">Chạm để khám phá bí mật ✨</div>
-          </div>
-          <div class="gift-opened-content" id="opened-0">
-            <div class="gift-img-area">
-              <img src="anni_images/n1.JPG" alt="Buổi tối xem phim" onclick="openLightbox(this.src)" />
-            </div>
-            <div class="gift-content-body">
-              <div class="gift-opened-title">Buổi Tối Xem Phim 🎬</div>
-              <div class="gift-message">
-                "Anh Thư ơi, hai đứa mình book vé xem phim nhé? Anh sẽ mua bắp rang bơ nhiều muối theo sở thích của em 🍿 Ngồi cạnh Anh Thư trong rạp tối, anh chỉ cần em thôi."
-              </div>
-              <div class="gift-actions" id="actions-0">
-                <button class="btn-accept" onclick="acceptGift(event,0)">💖 Em đồng ý nha!</button>
-                <button class="btn-later" onclick="laterGift(event,0)">🌙 Lưu lần sau</button>
-              </div>
-            </div>
-          </div>
-          <div class="gift-shimmer" id="shimmer-0"></div>
-        </div>
+    <!-- MUSIC PLAYER -->
+    <div id="music-player">
+      <button
+        id="play-btn"
+        title="Phát/Dừng nhạc"
+        aria-label="Phát hoặc dừng nhạc"
+      >
+        ▶
+      </button>
+      <div class="player-info">
+        <span class="player-title">🎵 Nhạc Của Chúng Mình</span>
+        <span class="player-sub">Nhạc nền lãng mạn ♡</span>
       </div>
-
-      <!-- BOX 1: Ăn buffet -->
-      <div class="gift-box" id="box-1" onclick="openBox(1)">
-        <div class="gift-inner">
-          <div class="gift-closed" id="closed-1">
-            <div class="gift-bow">🎀</div>
-            <div class="gift-ribbon"></div>
-            <div class="gift-lid-wrap">
-              <div class="gift-lid" id="lid-1" style="background:linear-gradient(135deg,#FDEBD0,#F0D080);">🍽️</div>
-            </div>
-            <div class="gift-closed-title">Hộp Số 2</div>
-            <div class="gift-closed-hint">Chạm để khám phá bí mật ✨</div>
-          </div>
-          <div class="gift-opened-content" id="opened-1">
-            <div class="gift-img-area">
-              <img src="anni_images/n2.jpg" alt="Ăn buffet" onclick="openLightbox(this.src)" />
-            </div>
-            <div class="gift-content-body">
-              <div class="gift-opened-title">Ăn Buffet Hai Đứa 🥂</div>
-              <div class="gift-message">
-                "Anh muốn đưa Anh Thư đi ăn thật ngon, ăn no tới bụng tròn lăn không đi được 😄 Chọn quán nào em thích nhất nhé, anh chiều em!"
-              </div>
-              <div class="gift-actions" id="actions-1">
-                <button class="btn-accept" onclick="acceptGift(event,1)">💖 Em đồng ý nha!</button>
-                <button class="btn-later" onclick="laterGift(event,1)">🌙 Lưu lần sau</button>
-              </div>
-            </div>
-          </div>
-          <div class="gift-shimmer" id="shimmer-1"></div>
-        </div>
+      <div class="music-wave paused" id="music-wave">
+        <span></span><span></span><span></span><span></span><span></span>
       </div>
-
-      <!-- BOX 2: Shopping -->
-      <div class="gift-box" id="box-2" onclick="openBox(2)">
-        <div class="gift-inner">
-          <div class="gift-closed" id="closed-2">
-            <div class="gift-bow">🎀</div>
-            <div class="gift-ribbon"></div>
-            <div class="gift-lid-wrap">
-              <div class="gift-lid" id="lid-2" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7);">🛍️</div>
-            </div>
-            <div class="gift-closed-title">Hộp Số 3</div>
-            <div class="gift-closed-hint">Chạm để khám phá bí mật ✨</div>
-          </div>
-          <div class="gift-opened-content" id="opened-2">
-            <div class="gift-img-area">
-              <img src="anni_images/n31.JPG" alt="Shopping" onclick="openLightbox(this.src)" />
-            </div>
-            <div class="gift-content-body">
-              <div class="gift-opened-title">Shopping Cùng Anh 🛍️</div>
-              <div class="gift-message">
-                "Anh sẽ làm người xách túi đồ kiên nhẫn nhất thế giới 😂 Anh Thư cứ thích gì thì chỉ, anh chỉ muốn nhìn em vui khi thử đồ thôi."
-              </div>
-              <div class="gift-actions" id="actions-2">
-                <button class="btn-accept" onclick="acceptGift(event,2)">💖 Em đồng ý nha!</button>
-                <button class="btn-later" onclick="laterGift(event,2)">🌙 Lưu lần sau</button>
-              </div>
-            </div>
-          </div>
-          <div class="gift-shimmer" id="shimmer-2"></div>
-        </div>
-      </div>
-
-      <!-- BOX 3: Cafe dạo phố -->
-      <div class="gift-box" id="box-3" onclick="openBox(3)">
-        <div class="gift-inner">
-          <div class="gift-closed" id="closed-3">
-            <div class="gift-bow">🎀</div>
-            <div class="gift-ribbon"></div>
-            <div class="gift-lid-wrap">
-              <div class="gift-lid" id="lid-3" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9);">☕</div>
-            </div>
-            <div class="gift-closed-title">Hộp Số 4</div>
-            <div class="gift-closed-hint">Chạm để khám phá bí mật ✨</div>
-          </div>
-          <div class="gift-opened-content" id="opened-3">
-            <div class="gift-img-area">
-              <img src="anni_images/n9.jpg" alt="Dạo phố cafe" onclick="openLightbox(this.src)" />
-            </div>
-            <div class="gift-content-body">
-              <div class="gift-opened-title">Dạo Phố & Cafe Chill ☕</div>
-              <div class="gift-message">
-                "Chỉ cần cầm tay Anh Thư đi dạo phố buổi chiều, gọi 2 ly cà phê, nhìn em kể chuyện linh tinh... là đủ hạnh phúc cho anh rồi 🌅"
-              </div>
-              <div class="gift-actions" id="actions-3">
-                <button class="btn-accept" onclick="acceptGift(event,3)">💖 Em đồng ý nha!</button>
-                <button class="btn-later" onclick="laterGift(event,3)">🌙 Lưu lần sau</button>
-              </div>
-            </div>
-          </div>
-          <div class="gift-shimmer" id="shimmer-3"></div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+    <audio id="bg-music" loop>
+      <source src="music.mp3" type="audio/mpeg" />
+    </audio>
 
-<!-- ============================================================
-     LOVE NOTE SECTION
-============================================================ -->
-<section id="love-note">
-  <div class="section-inner">
-    <p class="section-label">Từ trái tim anh 💌</p>
-    <h2 class="section-title">Gửi Anh Thư Yêu</h2>
-    <div class="section-divider"></div>
-    <div class="love-note-card">
-      <p class="love-quote">
-        "Một năm qua, Anh Thư đã làm mỗi ngày của anh trở nên đặc biệt hơn chỉ bằng sự hiện diện của em.
-        Cảm ơn em đã chọn anh, đã ở bên anh mỗi lúc vui buồn, đã là người anh muốn kể mọi chuyện vụn vặt nhất.
-        Anh yêu Anh Thư rất nhiều – hôm nay, ngày mai, và mãi mãi."
+    <!-- ===== HERO ===== -->
+    <section id="hero">
+      <div class="hero-deco-top"></div>
+      <span
+        class="emoji-float"
+        style="left: 6%; top: 18%; animation-delay: 0s; z-index: 4"
+        >🌸</span
+      >
+      <span
+        class="emoji-float"
+        style="left: 87%; top: 22%; animation-delay: 1.4s; z-index: 4"
+        >🌷</span
+      >
+      <span
+        class="emoji-float"
+        style="left: 13%; top: 72%; animation-delay: 3.2s; z-index: 4"
+        >💖</span
+      >
+      <span
+        class="emoji-float"
+        style="left: 79%; top: 66%; animation-delay: 2.1s; z-index: 4"
+        >✨</span
+      >
+      <span
+        class="emoji-float"
+        style="left: 49%; top: 12%; animation-delay: 0.8s; z-index: 4"
+        >🦋</span
+      >
+
+      <div class="photo-frame-wrapper" id="hero-photo">
+        <img
+          src="anni_images/special.jpeg"
+          alt="Ảnh đôi mình"
+          class="photo-frame"
+          onclick="openLightbox(this.src)"
+        />
+        <div class="photo-corner tl">🌸</div>
+        <div class="photo-corner tr">💛</div>
+        <div class="photo-corner bl">💖</div>
+        <div class="photo-corner br">🌸</div>
+      </div>
+
+      <!-- First line: "Anh Thư". Everything after: "em / emiu" -->
+      <p class="hero-greeting">~ Dành riêng cho Anh Thư ~</p>
+      <h1 class="hero-title">1 Năm<br /><em>Anniversary</em></h1>
+      <p class="hero-names">Phước Trung ♡ emiu</p>
+
+      <div class="countdown-wrap">
+        <div class="cd-item">
+          <div class="cd-num" id="cd-days">--</div>
+          <div class="cd-label">Ngày</div>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-item">
+          <div class="cd-num" id="cd-hours">--</div>
+          <div class="cd-label">Giờ</div>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-item">
+          <div class="cd-num" id="cd-mins">--</div>
+          <div class="cd-label">Phút</div>
+        </div>
+        <div class="cd-sep">·</div>
+        <div class="cd-item">
+          <div class="cd-num" id="cd-secs">--</div>
+          <div class="cd-label">Giây</div>
+        </div>
+      </div>
+      <p class="countdown-msg" id="countdown-msg">Đang đếm ngược... 🌸</p>
+    </section>
+
+    <!-- ===== TIMELINE ===== -->
+    <section id="journey">
+      <div class="section-inner">
+        <p class="section-label">Hành trình của chúng mình</p>
+        <h2 class="section-title">Từng khoảnh khắc bên em</h2>
+        <div class="section-divider"></div>
+
+        <div class="timeline">
+          <!-- 1: first meeting — 1.jpg: night selfie, she's smiling, peace sign, he's on a motorbike -->
+          <div class="tl-item reveal">
+            <div class="tl-dot">💬</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/1.jpg"
+                alt="Lần đầu gặp em"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">2025 · Buổi tối</div>
+                <div class="tl-title">Lần đầu gặp em</div>
+                <div class="tl-desc">
+                  Cái nhìn đầu tiên, nụ cười đầu tiên — tim anh đã xao động từ
+                  buổi đêm hôm đó rồi.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2: first CF — 2.jpg: two iced coffees on a table, both doing peace signs -->
+          <div class="tl-item reveal reveal-d1">
+            <div class="tl-dot">☕</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/2.jpg"
+                alt="Lần CF đầu tiên"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">2025 · Cafe</div>
+                <div class="tl-title">Lần CF đầu tiên</div>
+                <div class="tl-desc">
+                  Anh run run nói thích em, rồi nhìn em gật đầu — 2 ly cà phê
+                  hôm đó ngọt hơn bất kỳ ngày nào khác.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3: first karaoke — 3.jpg: karaoke room with colorful lights -->
+          <div class="tl-item reveal">
+            <div class="tl-dot">🎤</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/3.jpg"
+                alt="Lần đi karaoke đầu tiên"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">2025 · Kake</div>
+                <div class="tl-title">Lần đi kake đầu tiên</div>
+                <div class="tl-desc">
+                  Em hát hay nên anh nhường mic suốt — thật ra anh chỉ muốn ngồi
+                  nhìn em vui thôi 🎤
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4: chill date — 4.jpg: mirror selfie, she wears a mini crown headband -->
+          <div class="tl-item reveal reveal-d1">
+            <div class="tl-dot">✨</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/4.jpg"
+                alt="Buổi chill cùng nhau"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">2025</div>
+                <div class="tl-title">Buổi chill cùng em</div>
+                <div class="tl-desc">
+                  Em đội vương miện nhí đứng trước gương mà cute không chịu được
+                  — anh chụp lén ngay 📷
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5: surprise date — 6.jpg: restaurant, she holds a bouquet + teddy bear beside -->
+          <div class="tl-item reveal">
+            <div class="tl-dot">🌹</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/6.jpg"
+                alt="Bất ngờ nhỏ dành cho em"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">2025</div>
+                <div class="tl-title">Bất ngờ nhỏ dành cho em</div>
+                <div class="tl-desc">
+                  Anh chuẩn bị hoa và quà, nhìn mặt em ngạc nhiên rồi cười — anh
+                  hạnh phúc lắm chỉ vì điều đó thôi.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6: anniversary -->
+          <div class="tl-item reveal reveal-d1">
+            <div class="tl-dot">🎂</div>
+            <div class="tl-card">
+              <img
+                src="anni_images/12.jpg"
+                alt="1 năm hạnh phúc"
+                class="tl-thumb"
+                onclick="openLightbox(this.src)"
+              />
+              <div class="tl-card-body">
+                <div class="tl-date">21/06/2026</div>
+                <div class="tl-title">1 Năm Hạnh Phúc 🎉</div>
+                <div class="tl-desc">
+                  Một năm bên em — mỗi ngày đều là ký ức anh muốn giữ mãi. Happy
+                  Anniversary, emiu ❤️
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FUN PHOTOS (alternating) ===== -->
+    <section id="fun-section">
+      <div class="section-inner">
+        <p class="section-label">Mặt xấu của chúng mình 😂</p>
+        <h2 class="section-title">Đừng để ai thấy cái này</h2>
+        <div class="section-divider"></div>
+
+        <div
+          class="fun-frame-pair reveal"
+          id="fun-frame"
+          onclick="
+            openLightbox(
+              document
+                .getElementById('fun-layer-a')
+                .classList.contains('visible')
+                ? 'anni_images/fun.jpg'
+                : 'anni_images/fun2.jpg',
+            )
+          "
+        >
+          <div class="fun-img-layer visible" id="fun-layer-a">
+            <img src="anni_images/fun.jpg" alt="Mặt xấu của anh 😂" />
+          </div>
+          <div class="fun-img-layer hidden" id="fun-layer-b">
+            <img src="anni_images/fun2.jpg" alt="Mặt xấu của em 😂" />
+          </div>
+        </div>
+        <p class="fun-caption" id="fun-caption">
+          Đây là anh 🙈 (đừng cho ai xem)
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== SPECIAL MOMENTS (below timeline) ===== -->
+    <section id="special-section">
+      <div class="section-inner">
+        <p class="section-label">Những ngày không quên</p>
+        <h2 class="section-title">Những khoảnh khắc đặc biệt</h2>
+        <div class="section-divider"></div>
+
+        <div class="special-grid">
+          <!-- special1: her birthday — PHOTO OBJET booth strip Jan.07.2026 -->
+          <div class="special-card reveal">
+            <img
+              src="anni_images/special.jpeg"
+              alt="Sinh nhật emiu"
+              class="special-photo"
+              onclick="openLightbox(this.src)"
+            />
+            <div class="special-card-body">
+              <div class="special-badge">🎂 Sinh nhật emiu</div>
+              <div class="special-card-title">Happy Birthday, em yêu!</div>
+              <div class="special-card-desc">
+                Ngày sinh nhật em, hai đứa rủ nhau đi chụp ảnh booth thật nhiều
+                — anh muốn đóng khung buổi chiều hôm đó lại mãi mãi.
+              </div>
+            </div>
+          </div>
+
+          <!-- special2: his birthday — couple selfie -->
+          <div class="special-card reveal reveal-d1">
+            <img
+              src="anni_images/special2.jpeg"
+              alt="Sinh nhật anh"
+              class="special-photo"
+              onclick="openLightbox(this.src)"
+            />
+            <div class="special-card-body">
+              <div class="special-badge">🎂 Sinh nhật anh</div>
+              <div class="special-card-title">Em đã ở bên anh hôm đó</div>
+              <div class="special-card-desc">
+                Sinh nhật anh mà có em bên cạnh — đó là món quà ý nghĩa nhất,
+                không cần gì thêm nữa cả.
+              </div>
+            </div>
+          </div>
+
+          <!-- totnghiep1: graduation — she's in gown holding flowers -->
+          <div class="special-card reveal reveal-d2">
+            <img
+              src="anni_images/totnghiep.PNG"
+              alt="Lễ tốt nghiệp của emiu"
+              class="special-photo"
+              onclick="openLightbox(this.src)"
+            />
+            <div class="special-card-body">
+              <div class="special-badge">🎓 Tốt nghiệp</div>
+              <div class="special-card-title">Em mặc áo cử nhân 🎓</div>
+              <div class="special-card-desc">
+                Em cầm hoa, đội mũ, mặc áo cử nhân — anh tự hào về em vô cùng.
+                Bé iu học giỏi ghê nhen 💙
+              </div>
+            </div>
+          </div>
+
+          <!-- totnghiep2: graduation selfie with graduation lanyard -->
+          <div class="special-card reveal reveal-d3">
+            <img
+              src="anni_images/totnghiep2.JPG"
+              alt="Lễ tốt nghiệp của emiu — cùng anh"
+              class="special-photo"
+              onclick="openLightbox(this.src)"
+            />
+            <div class="special-card-body">
+              <div class="special-badge">🎓 Tốt nghiệp</div>
+              <div class="special-card-title">Anh được ở bên em hôm đó</div>
+              <div class="special-card-desc">
+                Anh đến trường cùng em trong ngày trọng đại nhất — hạnh phúc
+                không thể tả khi được chứng kiến em tốt nghiệp.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GIFT BOXES ===== -->
+    <section id="gifts">
+      <div class="section-inner">
+        <p class="section-label">Dành riêng cho em 🎁</p>
+        <h2 class="section-title">Kho Báu Hẹn Hò</h2>
+        <div class="section-divider"></div>
+        <p
+          style="
+            text-align: center;
+            color: var(--text-lt);
+            font-size: 13px;
+            margin-top: -36px;
+            margin-bottom: 34px;
+            font-style: italic;
+            line-height: 1.7;
+          "
+        >
+          Mỗi hộp là một hẹn hò bí mật — mở và chọn nhé em! 🔓
+        </p>
+
+        <div class="gifts-grid">
+          <div class="gift-box reveal" id="box-0" onclick="openBox(0)">
+            <div class="gift-inner">
+              <div class="gift-closed" id="closed-0">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-ribbon"></div>
+                <div class="gift-lid-wrap">
+                  <div
+                    class="gift-lid"
+                    id="lid-0"
+                    style="
+                      background: linear-gradient(135deg, #f9d5dc, #e8879c);
+                    "
+                  >
+                    🎬
+                  </div>
+                </div>
+                <div class="gift-closed-title">Hộp Số 1</div>
+                <div class="gift-closed-hint">Chạm để mở bí mật ✨</div>
+              </div>
+              <div class="gift-opened-content" id="opened-0">
+                <div class="gift-img-area">
+                  <img
+                    src="anni_images/11.jpg"
+                    alt="Buổi tối xem phim"
+                    onclick="openLightbox(this.src)"
+                  />
+                </div>
+                <div class="gift-content-body">
+                  <div class="gift-opened-title">Buổi Tối Xem Phim 🎬</div>
+                  <div class="gift-message">
+                    "Hai đứa mình book vé xem phim nhé em? Anh sẽ mua bắp rang
+                    bơ nhiều muối theo sở thích của em 🍿 Ngồi cạnh em trong rạp
+                    tối, anh chỉ cần em thôi."
+                  </div>
+                  <div class="gift-actions" id="actions-0">
+                    <button class="btn-accept" onclick="acceptGift(event, 0)">
+                      💖 Em đồng ý nha!
+                    </button>
+                    <button class="btn-later" onclick="laterGift(event, 0)">
+                      🌙 Lưu lần sau
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="gift-shimmer" id="shimmer-0"></div>
+            </div>
+          </div>
+
+          <div
+            class="gift-box reveal reveal-d1"
+            id="box-1"
+            onclick="openBox(1)"
+          >
+            <div class="gift-inner">
+              <div class="gift-closed" id="closed-1">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-ribbon"></div>
+                <div class="gift-lid-wrap">
+                  <div
+                    class="gift-lid"
+                    id="lid-1"
+                    style="
+                      background: linear-gradient(135deg, #f2e6d0, #e8c468);
+                    "
+                  >
+                    🍽️
+                  </div>
+                </div>
+                <div class="gift-closed-title">Hộp Số 2</div>
+                <div class="gift-closed-hint">Chạm để mở bí mật ✨</div>
+              </div>
+              <div class="gift-opened-content" id="opened-1">
+                <div class="gift-img-area">
+                  <img
+                    src="anni_images/5.jpg"
+                    alt="Ăn ngon hai đứa"
+                    onclick="openLightbox(this.src)"
+                  />
+                </div>
+                <div class="gift-content-body">
+                  <div class="gift-opened-title">Ăn Ngon Hai Đứa 🥂</div>
+                  <div class="gift-message">
+                    "Anh muốn đưa em đi ăn thật ngon, ăn no tới bụng tròn lăn
+                    không đi được 😄 Chọn quán nào em thích nhất nhé, anh chiều
+                    em!"
+                  </div>
+                  <div class="gift-actions" id="actions-1">
+                    <button class="btn-accept" onclick="acceptGift(event, 1)">
+                      💖 Em đồng ý nha!
+                    </button>
+                    <button class="btn-later" onclick="laterGift(event, 1)">
+                      🌙 Lưu lần sau
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="gift-shimmer" id="shimmer-1"></div>
+            </div>
+          </div>
+
+          <div
+            class="gift-box reveal reveal-d2"
+            id="box-2"
+            onclick="openBox(2)"
+          >
+            <div class="gift-inner">
+              <div class="gift-closed" id="closed-2">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-ribbon"></div>
+                <div class="gift-lid-wrap">
+                  <div
+                    class="gift-lid"
+                    id="lid-2"
+                    style="
+                      background: linear-gradient(135deg, #e0f2e9, #a8d5b5);
+                    "
+                  >
+                    🛍️
+                  </div>
+                </div>
+                <div class="gift-closed-title">Hộp Số 3</div>
+                <div class="gift-closed-hint">Chạm để mở bí mật ✨</div>
+              </div>
+              <div class="gift-opened-content" id="opened-2">
+                <div class="gift-img-area">
+                  <img
+                    src="anni_images/8.jpg"
+                    alt="Shopping cùng nhau"
+                    onclick="openLightbox(this.src)"
+                  />
+                </div>
+                <div class="gift-content-body">
+                  <div class="gift-opened-title">Shopping Cùng Anh 🛍️</div>
+                  <div class="gift-message">
+                    "Anh sẽ làm người xách túi đồ kiên nhẫn nhất thế giới 😂 Em
+                    cứ thích gì thì chỉ, anh chỉ muốn nhìn em vui khi thử đồ
+                    thôi."
+                  </div>
+                  <div class="gift-actions" id="actions-2">
+                    <button class="btn-accept" onclick="acceptGift(event, 2)">
+                      💖 Em đồng ý nha!
+                    </button>
+                    <button class="btn-later" onclick="laterGift(event, 2)">
+                      🌙 Lưu lần sau
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="gift-shimmer" id="shimmer-2"></div>
+            </div>
+          </div>
+
+          <div
+            class="gift-box reveal reveal-d3"
+            id="box-3"
+            onclick="openBox(3)"
+          >
+            <div class="gift-inner">
+              <div class="gift-closed" id="closed-3">
+                <div class="gift-bow">🎀</div>
+                <div class="gift-ribbon"></div>
+                <div class="gift-lid-wrap">
+                  <div
+                    class="gift-lid"
+                    id="lid-3"
+                    style="
+                      background: linear-gradient(135deg, #e3f2fd, #90caf9);
+                    "
+                  >
+                    ☕
+                  </div>
+                </div>
+                <div class="gift-closed-title">Hộp Số 4</div>
+                <div class="gift-closed-hint">Chạm để mở bí mật ✨</div>
+              </div>
+              <div class="gift-opened-content" id="opened-3">
+                <div class="gift-img-area">
+                  <img
+                    src="anni_images/4.jpg"
+                    alt="Dạo phố cafe"
+                    onclick="openLightbox(this.src)"
+                  />
+                </div>
+                <div class="gift-content-body">
+                  <div class="gift-opened-title">Dạo Phố & Cafe Chill ☕</div>
+                  <div class="gift-message">
+                    "Chỉ cần cầm tay em đi dạo phố buổi chiều, gọi 2 ly cà phê,
+                    nghe em kể chuyện linh tinh... là đủ hạnh phúc cho anh rồi
+                    🌅"
+                  </div>
+                  <div class="gift-actions" id="actions-3">
+                    <button class="btn-accept" onclick="acceptGift(event, 3)">
+                      💖 Em đồng ý nha!
+                    </button>
+                    <button class="btn-later" onclick="laterGift(event, 3)">
+                      🌙 Lưu lần sau
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="gift-shimmer" id="shimmer-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOVE NOTE ===== -->
+    <section id="love-note">
+      <div class="section-inner">
+        <p class="section-label">Từ trái tim anh 💌</p>
+        <h2 class="section-title">Gửi em yêu</h2>
+        <div class="section-divider"></div>
+        <div class="love-note-card reveal">
+          <p class="love-quote">
+            "Một năm qua, em đã làm mỗi ngày của anh trở nên đặc biệt hơn chỉ
+            bằng sự hiện diện của em. Cảm ơn em đã chọn anh, đã ở bên anh mỗi
+            lúc vui buồn, đã là người anh muốn kể mọi chuyện vụn vặt nhất. Anh
+            yêu emiu rất nhiều — hôm nay, ngày mai, và mãi mãi."
+          </p>
+          <div class="love-sign">~ Anh yêu emiu ❤️ ~</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Made with <span>♥</span> dành cho <span>Anh Thư</span> yêu ·
+        <span>1 Năm Bên Em 🌸</span>
       </p>
-      <div class="love-sign">~ Anh yêu Anh Thư ❤️ ~</div>
-    </div>
-  </div>
-</section>
+    </footer>
 
-<!-- ============================================================
-     FOOTER
-============================================================ -->
-<footer>
-  <p>Made with <span>♥</span> dành cho <span>Anh Thư</span> yêu · <span>1 Năm Bên Em 🌸</span></p>
-</footer>
-
-<!-- ============================================================
-     JAVASCRIPT
-============================================================ -->
-<script>
-/* ================================================================
+    <script>
+      /* ================================================================
    CONFIG
 ================================================================ */
-// Kỷ niệm tròn 1 năm: 21/06/2026
-const ANNIVERSARY_DATE = new Date('2026-06-21T00:00:00');
+      const ANNIVERSARY_DATE = new Date("2026-06-21T00:00:00");
 
-// Ảnh cho floating mini photos quanh màn hình
-const FLOAT_IMAGES = [
-  'anni_images/first.jpg',
-  'anni_images/kake.jpg',
-  'anni_images/lookMe.jpg',
-  'anni_images/n3.jpg',
-  'anni_images/n7.jpg',
-  'anni_images/n11.jpg',
-];
+      const FLOAT_IMAGES = [
+        "anni_images/4.jpg",
+        "anni_images/5.jpg",
+        "anni_images/7.JPG",
+        "anni_images/8.jpg",
+        "anni_images/10.jpg",
+        "anni_images/12.jpg",
+      ];
 
-
-/* ================================================================
+      /* ================================================================
    PARTICLES CANVAS
 ================================================================ */
-(function () {
-  const canvas = document.getElementById('particles-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
+      (function () {
+        const canvas = document.getElementById("particles-canvas");
+        const ctx = canvas.getContext("2d");
+        let W, H, particles;
 
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  function createParticles() {
-    particles = Array.from({ length: 55 }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 2.5 + 0.5,
-      dx: (Math.random() - 0.5) * 0.35,
-      dy: -Math.random() * 0.5 - 0.2,
-      alpha: Math.random() * 0.5 + 0.2,
-      color: ['#F4A7B9','#D4A843','#FBDCE2','#F0D080','#E8869A'][Math.floor(Math.random() * 5)],
-    }));
-  }
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha;
-      ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
-      p.alpha -= 0.001;
-      if (p.y < -10 || p.alpha <= 0) {
-        p.y = H + 10;
-        p.x = Math.random() * W;
-        p.alpha = Math.random() * 0.5 + 0.2;
-      }
-    });
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', () => { resize(); createParticles(); });
-  resize(); createParticles(); draw();
-})();
+        function resize() {
+          W = canvas.width = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+        }
+        function createParticles() {
+          particles = Array.from({ length: 55 }, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 2.5 + 0.5,
+            dx: (Math.random() - 0.5) * 0.35,
+            dy: -Math.random() * 0.5 - 0.2,
+            alpha: Math.random() * 0.5 + 0.2,
+            color: ["#E8879C", "#C89838", "#F9D5DC", "#E8C468", "#C96B7E"][
+              Math.floor(Math.random() * 5)
+            ],
+          }));
+        }
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          particles.forEach((p) => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.fill();
+            p.x += p.dx;
+            p.y += p.dy;
+            p.alpha -= 0.001;
+            if (p.y < -10 || p.alpha <= 0) {
+              p.y = H + 10;
+              p.x = Math.random() * W;
+              p.alpha = Math.random() * 0.5 + 0.2;
+            }
+          });
+          ctx.globalAlpha = 1;
+          requestAnimationFrame(draw);
+        }
+        window.addEventListener("resize", () => {
+          resize();
+          createParticles();
+        });
+        resize();
+        createParticles();
+        draw();
+      })();
 
-/* ================================================================
-   COUNTDOWN TIMER – target: 21/06/2026
+      /* ================================================================
+   COUNTDOWN TIMER
 ================================================================ */
-function updateCountdown() {
-  const now  = new Date();
-  const diff = ANNIVERSARY_DATE - now;
-  const msgEl = document.getElementById('countdown-msg');
+      function updateCountdown() {
+        const diff = ANNIVERSARY_DATE - new Date();
+        const msgEl = document.getElementById("countdown-msg");
+        if (diff <= 0) {
+          document.getElementById("cd-days").textContent = "01";
+          document.getElementById("cd-hours").textContent = "00";
+          document.getElementById("cd-mins").textContent = "00";
+          document.getElementById("cd-secs").textContent = "00";
+          msgEl.textContent =
+            "🎉 Chúc mừng 1 năm bên em! Happy Anniversary emiu! 🥂";
+          return;
+        }
+        document.getElementById("cd-days").textContent = String(
+          Math.floor(diff / 86400000),
+        ).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(
+          Math.floor((diff % 86400000) / 3600000),
+        ).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(
+          Math.floor((diff % 3600000) / 60000),
+        ).padStart(2, "0");
+        document.getElementById("cd-secs").textContent = String(
+          Math.floor((diff % 60000) / 1000),
+        ).padStart(2, "0");
+        msgEl.textContent = `Còn ${Math.floor(diff / 86400000)} ngày nữa là tròn 1 năm bên em ❤️`;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
 
-  if (diff <= 0) {
-    document.getElementById('cd-days').textContent  = '01';
-    document.getElementById('cd-hours').textContent = '00';
-    document.getElementById('cd-mins').textContent  = '00';
-    document.getElementById('cd-secs').textContent  = '00';
-    msgEl.textContent = '🎉 Chúc mừng 1 năm bên Anh Thư! Happy Anniversary! 🥂';
-    return;
-  }
-
-  const days  = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins  = Math.floor((diff % 3600000)  / 60000);
-  const secs  = Math.floor((diff % 60000)    / 1000);
-
-  document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
-  document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
-  msgEl.textContent = `Còn ${days} ngày nữa là tròn 1 năm bên Anh Thư ❤️`;
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-/* ================================================================
+      /* ================================================================
    MUSIC PLAYER
 ================================================================ */
-(function () {
-  const playBtn = document.getElementById('play-btn');
-  const wave    = document.getElementById('music-wave');
-  const audioEl = document.getElementById('bg-music');
-  let isPlaying = false;
-  let audioCtx, gainNode, melodyTimer;
+      (function () {
+        const playBtn = document.getElementById("play-btn");
+        const wave = document.getElementById("music-wave");
+        const audioEl = document.getElementById("bg-music");
+        let isPlaying = false;
+        let audioCtx, gainNode, melodyTimer;
 
-  // Simple fallback piano melody if music.mp3 fails to load
-  const NOTES = [
-    {freq:523.25,dur:.5},{freq:659.25,dur:.5},{freq:783.99,dur:.75},
-    {freq:659.25,dur:.5},{freq:523.25,dur:.5},{freq:392.00,dur:.75},
-    {freq:440.00,dur:.5},{freq:523.25,dur:.5},{freq:587.33,dur:.75},
-    {freq:523.25,dur:1.0},
-  ];
+        const NOTES = [
+          { freq: 523.25, dur: 0.5 },
+          { freq: 659.25, dur: 0.5 },
+          { freq: 783.99, dur: 0.75 },
+          { freq: 659.25, dur: 0.5 },
+          { freq: 523.25, dur: 0.5 },
+          { freq: 392.0, dur: 0.75 },
+          { freq: 440.0, dur: 0.5 },
+          { freq: 523.25, dur: 0.5 },
+          { freq: 587.33, dur: 0.75 },
+          { freq: 523.25, dur: 1.0 },
+        ];
 
-  function playFallback() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      gainNode = audioCtx.createGain();
-      gainNode.gain.value = 0.12;
-      gainNode.connect(audioCtx.destination);
-    }
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    let t = audioCtx.currentTime;
-    function next(idx) {
-      const n = NOTES[idx % NOTES.length];
-      const osc = audioCtx.createOscillator();
-      const env = audioCtx.createGain();
-      osc.connect(env); env.connect(gainNode);
-      osc.type = 'sine'; osc.frequency.value = n.freq;
-      env.gain.setValueAtTime(0, t);
-      env.gain.linearRampToValueAtTime(1, t + 0.05);
-      env.gain.exponentialRampToValueAtTime(0.001, t + n.dur * 0.9);
-      osc.start(t); osc.stop(t + n.dur);
-      t += n.dur;
-      melodyTimer = setTimeout(() => { if (isPlaying) next(idx + 1); }, n.dur * 1000 - 30);
-    }
-    next(0);
-  }
-  function stopFallback() {
-    clearTimeout(melodyTimer);
-    if (audioCtx) audioCtx.suspend();
-  }
+        function playFallback() {
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            gainNode = audioCtx.createGain();
+            gainNode.gain.value = 0.12;
+            gainNode.connect(audioCtx.destination);
+          }
+          if (audioCtx.state === "suspended") audioCtx.resume();
+          let t = audioCtx.currentTime;
+          function next(idx) {
+            const n = NOTES[idx % NOTES.length];
+            const osc = audioCtx.createOscillator();
+            const env = audioCtx.createGain();
+            osc.connect(env);
+            env.connect(gainNode);
+            osc.type = "sine";
+            osc.frequency.value = n.freq;
+            env.gain.setValueAtTime(0, t);
+            env.gain.linearRampToValueAtTime(1, t + 0.05);
+            env.gain.exponentialRampToValueAtTime(0.001, t + n.dur * 0.9);
+            osc.start(t);
+            osc.stop(t + n.dur);
+            t += n.dur;
+            melodyTimer = setTimeout(
+              () => {
+                if (isPlaying) next(idx + 1);
+              },
+              n.dur * 1000 - 30,
+            );
+          }
+          next(0);
+        }
 
-  function toggle() {
-    isPlaying = !isPlaying;
-    if (isPlaying) {
-      playBtn.textContent = '⏸';
-      playBtn.classList.add('playing');
-      wave.classList.remove('paused');
-      audioEl.play().catch(() => playFallback());
-    } else {
-      playBtn.textContent = '▶';
-      playBtn.classList.remove('playing');
-      wave.classList.add('paused');
-      audioEl.pause();
-      stopFallback();
-    }
-  }
+        function toggle() {
+          isPlaying = !isPlaying;
+          if (isPlaying) {
+            playBtn.textContent = "⏸";
+            playBtn.classList.add("playing");
+            wave.classList.remove("paused");
+            audioEl.play().catch(() => playFallback());
+          } else {
+            playBtn.textContent = "▶";
+            playBtn.classList.remove("playing");
+            wave.classList.add("paused");
+            audioEl.pause();
+            clearTimeout(melodyTimer);
+            if (audioCtx) audioCtx.suspend();
+          }
+        }
 
-  playBtn.addEventListener('click', toggle);
+        playBtn.addEventListener("click", toggle);
+        document.addEventListener(
+          "click",
+          function tryAuto() {
+            if (!isPlaying) toggle();
+            document.removeEventListener("click", tryAuto);
+          },
+          { once: true },
+        );
+      })();
 
-  // Autoplay on first interaction
-  document.addEventListener('click', function tryAuto() {
-    if (!isPlaying) toggle();
-    document.removeEventListener('click', tryAuto);
-  }, { once: true });
-})();
-
-/* ================================================================
+      /* ================================================================
    LIGHTBOX
 ================================================================ */
-function openLightbox(src) {
-  const lb  = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = src;
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.getElementById('lightbox-img').src = '';
-  document.body.style.overflow = '';
-}
-document.getElementById('lightbox').addEventListener('click', function (e) {
-  if (e.target === this) closeLightbox();
-});
-document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+      function openLightbox(src) {
+        document.getElementById("lightbox-img").src = src;
+        document.getElementById("lightbox").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("active");
+        document.getElementById("lightbox-img").src = "";
+        document.body.style.overflow = "";
+      }
+      document
+        .getElementById("lightbox")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeLightbox();
+        });
+      document
+        .getElementById("lightbox-close")
+        .addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
 
-/* ================================================================
-   FLOATING MINI PHOTOS – drift along viewport edges
+      /* ================================================================
+   FLOATING MINI PHOTOS
 ================================================================ */
-(function () {
-  const driftAnims = ['drift1','drift2','drift3','drift4','drift5'];
-  const positions  = [
-    { top: '12%',  left: '2%'  },
-    { top: '48%',  left: '1%'  },
-    { top: '78%',  left: '3%'  },
-    { top: '16%',  right: '2%' },
-    { top: '52%',  right: '2%' },
-    { top: '80%',  right: '3%' },
-  ];
-  const sizes = [72, 80, 66, 76, 70, 64];
-  const container = document.getElementById('float-photos-container');
+      (function () {
+        const driftAnims = ["drift1", "drift2", "drift3", "drift4", "drift5"];
+        const positions = [
+          { top: "12%", left: "2%" },
+          { top: "48%", left: "1%" },
+          { top: "78%", left: "3%" },
+          { top: "16%", right: "2%" },
+          { top: "52%", right: "2%" },
+          { top: "80%", right: "3%" },
+        ];
+        const sizes = [72, 80, 66, 76, 70, 64];
+        const container = document.getElementById("float-photos-container");
 
-  FLOAT_IMAGES.forEach((src, i) => {
-    const pos  = positions[i % positions.length];
-    const size = sizes[i % sizes.length];
-    const anim = driftAnims[i % driftAnims.length];
-    const dur  = 8 + i * 1.4;
+        FLOAT_IMAGES.forEach((src, i) => {
+          const pos = positions[i % positions.length];
+          const size = sizes[i % sizes.length];
+          const anim = driftAnims[i % driftAnims.length];
+          const dur = 8 + i * 1.4;
+          const el = document.createElement("div");
+          el.className = "float-photo";
+          const st = [
+            `width:${size}px`,
+            `height:${size}px`,
+            `animation:${anim} ${dur}s ease-in-out infinite`,
+            `animation-delay:${i * 0.9}s`,
+          ];
+          if (pos.top) st.push(`top:${pos.top}`);
+          if (pos.left) st.push(`left:${pos.left}`);
+          if (pos.right) st.push(`right:${pos.right}`);
+          el.style.cssText = st.join(";");
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "Ảnh kỷ niệm";
+          el.appendChild(img);
+          el.addEventListener("click", () => openLightbox(src));
+          el.addEventListener("mouseenter", () => {
+            el.style.animationPlayState = "paused";
+          });
+          el.addEventListener("mouseleave", () => {
+            el.style.animationPlayState = "running";
+          });
+          container.appendChild(el);
+        });
+      })();
 
-    const el = document.createElement('div');
-    el.className = 'float-photo';
-
-    // Build inline styles
-    const styles = [`width:${size}px`, `height:${size}px`,
-      `animation:${anim} ${dur}s ease-in-out infinite`,
-      `animation-delay:${i * 0.9}s`];
-    if (pos.top)    styles.push(`top:${pos.top}`);
-    if (pos.bottom) styles.push(`bottom:${pos.bottom}`);
-    if (pos.left)   styles.push(`left:${pos.left}`);
-    if (pos.right)  styles.push(`right:${pos.right}`);
-    el.style.cssText = styles.join(';');
-
-    const img = document.createElement('img');
-    img.src = src; img.alt = 'Ảnh kỷ niệm';
-    el.appendChild(img);
-
-    el.addEventListener('click', () => openLightbox(src));
-    // Pause drift on hover, resume on leave
-    el.addEventListener('mouseenter', () => { el.style.animationPlayState = 'paused'; });
-    el.addEventListener('mouseleave', () => { el.style.animationPlayState = 'running'; });
-
-    container.appendChild(el);
-  });
-})();
-
-/* ================================================================
-   SURPRISE PHOTOS – roam freely around the viewport, take turns
-   appearing at random positions and drifting before fading out.
+      /* ================================================================
+   SURPRISE PHOTOS – drift around viewport
 ================================================================ */
-(function () {
-  // Full image pool (all verified to exist)
-  const POOL = [
-    'anni_images/n14.jpg', 'anni_images/n15.jpg', 'anni_images/n16.jpg',
-    'anni_images/n17.jpg', 'anni_images/n18.jpg', 'anni_images/n19.jpg',
-    'anni_images/n20.jpg', 'anni_images/n21.jpg', 'anni_images/n22.jpg',
-    'anni_images/sn.jpeg', 'anni_images/n11.jpg', 'anni_images/n3.jpg',
-    'anni_images/totnghiep.PNG', 'anni_images/totnghiep2.JPG',
-  ];
-  const SIZE = 84;
-  let poolIdx = 0;
-  let active = 0;
-  const MAX_ACTIVE = 3; // max simultaneously visible
+      (function () {
+        const POOL = [
+          "anni_images/7.JPG",
+          "anni_images/8.jpg",
+          "anni_images/9.JPG",
+          "anni_images/10.jpg",
+          "anni_images/11.jpg",
+          "anni_images/12.jpg",
+          "anni_images/13.jpg",
+          "anni_images/15.jpg",
+          "anni_images/16.jpg",
+          "anni_images/17.jpg",
+          "anni_images/18.jpg",
+          "anni_images/19.jpg",
+          "anni_images/20.jpg",
+          "anni_images/21.jpg",
+          "anni_images/4.jpg",
+          "anni_images/5.jpg",
+          "anni_images/6.jpg",
+        ];
+        const SIZE = 84;
+        let poolIdx = 0,
+          active = 0;
 
-  function randBetween(a, b) { return a + Math.random() * (b - a); }
+        function rnd(a, b) {
+          return a + Math.random() * (b - a);
+        }
 
-  function spawn() {
-    if (active >= MAX_ACTIVE) return;
-    active++;
+        function spawn() {
+          if (active >= 3) return;
+          active++;
+          const vw = window.innerWidth,
+            vh = window.innerHeight;
+          const z = Math.floor(Math.random() * 4);
+          let x, y;
+          if (z === 0) {
+            x = rnd(SIZE, vw - SIZE);
+            y = rnd(SIZE * 0.5, vh * 0.25);
+          } else if (z === 1) {
+            x = rnd(SIZE, vw - SIZE);
+            y = rnd(vh * 0.75, vh - SIZE);
+          } else if (z === 2) {
+            x = rnd(SIZE * 0.5, vw * 0.22);
+            y = rnd(SIZE, vh - SIZE);
+          } else {
+            x = rnd(vw * 0.78, vw - SIZE * 1.2);
+            y = rnd(SIZE, vh - SIZE);
+          }
 
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+          const dx = rnd(-55, 55),
+            dy = rnd(-50, 50),
+            dur = rnd(4500, 7000);
+          const el = document.createElement("div");
+          Object.assign(el.style, {
+            position: "fixed",
+            left: x + "px",
+            top: y + "px",
+            width: SIZE + "px",
+            height: SIZE + "px",
+            borderRadius: "12px",
+            overflow: "hidden",
+            border: "3px solid rgba(255,252,248,.88)",
+            boxShadow: "0 4px 20px rgba(0,0,0,.18)",
+            zIndex: "55",
+            pointerEvents: "none",
+            opacity: "0",
+            willChange: "transform,opacity",
+          });
+          const img = document.createElement("img");
+          img.src = POOL[poolIdx % POOL.length];
+          img.alt = "";
+          Object.assign(img.style, {
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+            imageOrientation: "from-image",
+          });
+          poolIdx++;
+          el.appendChild(img);
+          document.body.appendChild(el);
+          const anim = el.animate(
+            [
+              { opacity: 0, transform: "scale(0.85) translateY(10px)" },
+              {
+                opacity: 0.88,
+                transform: "scale(1) translateY(0)",
+                offset: 0.14,
+              },
+              {
+                opacity: 0.82,
+                transform: `translate(${dx * 0.55}px, ${dy * 0.55}px)`,
+                offset: 0.72,
+              },
+              {
+                opacity: 0,
+                transform: `translate(${dx}px, ${dy}px) scale(0.9)`,
+              },
+            ],
+            { duration: dur, easing: "ease-in-out", fill: "forwards" },
+          );
+          anim.onfinish = () => {
+            el.remove();
+            active--;
+            setTimeout(spawn, rnd(600, 1400));
+          };
+        }
+        setTimeout(() => spawn(), 1000);
+        setTimeout(() => spawn(), 2200);
+        setTimeout(() => spawn(), 3400);
+      })();
 
-    // Random position; prefer edges over dead-center
-    const zone = Math.floor(Math.random() * 4); // 0=top 1=bottom 2=left 3=right
-    let x, y;
-    switch (zone) {
-      case 0: x = randBetween(SIZE, vw - SIZE); y = randBetween(SIZE * 0.5, vh * 0.25); break;
-      case 1: x = randBetween(SIZE, vw - SIZE); y = randBetween(vh * 0.75, vh - SIZE); break;
-      case 2: x = randBetween(SIZE * 0.5, vw * 0.22); y = randBetween(SIZE, vh - SIZE); break;
-      default:x = randBetween(vw * 0.78, vw - SIZE * 1.2); y = randBetween(SIZE, vh - SIZE);
-    }
+      /* ================================================================
+   FUN PHOTOS ALTERNATING — fun.jpg and fun2.jpg, every 3.2s
+================================================================ */
+      (function () {
+        const layerA = document.getElementById("fun-layer-a");
+        const layerB = document.getElementById("fun-layer-b");
+        const caption = document.getElementById("fun-caption");
+        const labels = [
+          "Đây là anh 🙈 (đừng cho ai xem)",
+          "Còn đây là em 🙊 (càng không được xem)",
+        ];
+        let showingA = true;
 
-    // Drift vector: slow, gentle
-    const dx = randBetween(-55, 55);
-    const dy = randBetween(-50, 50);
-    const dur = randBetween(4500, 7000);
+        setInterval(() => {
+          showingA = !showingA;
+          layerA.className =
+            "fun-img-layer " + (showingA ? "visible" : "hidden");
+          layerB.className =
+            "fun-img-layer " + (showingA ? "hidden" : "visible");
+          caption.style.opacity = "0";
+          setTimeout(() => {
+            caption.textContent = labels[showingA ? 0 : 1];
+            caption.style.opacity = "1";
+          }, 450);
+        }, 3200);
+      })();
 
-    const el = document.createElement('div');
-    Object.assign(el.style, {
-      position:     'fixed',
-      left:         x + 'px',
-      top:          y + 'px',
-      width:        SIZE + 'px',
-      height:       SIZE + 'px',
-      borderRadius: '12px',
-      overflow:     'hidden',
-      border:       '3px solid rgba(255,255,255,.88)',
-      boxShadow:    '0 4px 20px rgba(0,0,0,.18)',
-      zIndex:       '55',
-      pointerEvents:'none',
-      opacity:      '0',
-      willChange:   'transform,opacity',
-    });
-
-    const img = document.createElement('img');
-    img.src = POOL[poolIdx % POOL.length];
-    img.alt = '';
-    Object.assign(img.style, {
-      width: '100%', height: '100%',
-      objectFit: 'cover', display: 'block',
-      imageOrientation: 'from-image',
-    });
-    poolIdx++;
-    el.appendChild(img);
-    document.body.appendChild(el);
-
-    // Web Animations API: fade in → drift → fade out
-    const anim = el.animate([
-      { opacity: 0,    transform: 'scale(0.85) translateY(10px)' },
-      { opacity: 0.88, transform: 'scale(1) translateY(0)',       offset: 0.14 },
-      { opacity: 0.82, transform: `translate(${dx * 0.55}px, ${dy * 0.55}px)`, offset: 0.72 },
-      { opacity: 0,    transform: `translate(${dx}px, ${dy}px) scale(0.9)` },
-    ], { duration: dur, easing: 'ease-in-out', fill: 'forwards' });
-
-    anim.onfinish = () => {
-      el.remove();
-      active--;
-      // Spawn next after a short random pause so they take turns
-      setTimeout(spawn, randBetween(600, 1400));
-    };
-  }
-
-  // Seed 3 initial photos at staggered times
-  setTimeout(() => spawn(), 1000);
-  setTimeout(() => spawn(), 2200);
-  setTimeout(() => spawn(), 3400);
-})();
-
-/* ================================================================
+      /* ================================================================
    GIFT BOX LOGIC
 ================================================================ */
-const boxState = JSON.parse(localStorage.getItem('boxStateAnni') || '{"accepted":[]}');
-// Restore previously accepted boxes on load
-boxState.accepted.forEach(idx => restoreAccepted(idx));
+      const boxState = JSON.parse(
+        localStorage.getItem("boxStateAnni") || '{"accepted":[]}',
+      );
+      boxState.accepted.forEach((idx) => restoreAccepted(idx));
 
-function openBox(idx) {
-  const box = document.getElementById(`box-${idx}`);
-  if (box.classList.contains('opened')) return;
-
-  const closedEl  = document.getElementById(`closed-${idx}`);
-  const openedEl  = document.getElementById(`opened-${idx}`);
-  const shimmerEl = document.getElementById(`shimmer-${idx}`);
-  const lidEl     = document.getElementById(`lid-${idx}`);
-
-  // 3D lid flip + reveal animation
-  const tl = gsap.timeline();
-  tl.to(lidEl, {
-      rotationX: -170,
-      y: -54,
-      transformPerspective: 400,
-      transformOrigin: 'center bottom',
-      duration: 0.55,
-      ease: 'power2.inOut',
-    })
-    .to(closedEl, { opacity: 0, y: -18, scale: 0.88, duration: 0.3, ease: 'power2.in' }, '-=0.18')
-    .set(closedEl, { display: 'none' })
-    .set(openedEl, { display: 'block', opacity: 0, scale: 0.84, y: 22 })
-    .to(openedEl,  { opacity: 1, scale: 1, y: 0, duration: 0.52, ease: 'back.out(1.6)' });
-
-  // Shimmer glow burst
-  tl.to(shimmerEl, { opacity: 1, duration: 0.18 }, '-=0.3')
-    .to(shimmerEl, { opacity: 0, duration: 0.9 }, '+=0.06');
-
-  spawnBurst();
-  box.classList.add('opened');
-}
-
-function acceptGift(e, idx) {
-  e.stopPropagation();
-  document.getElementById(`actions-${idx}`).innerHTML =
-    '<div class="gift-accepted-badge">✅ Anh Thư đã đồng ý! Hẹn hò thôi nào 😍</div>';
-
-  if (!boxState.accepted.includes(idx)) {
-    boxState.accepted.push(idx);
-    localStorage.setItem('boxStateAnni', JSON.stringify(boxState));
-  }
-
-  const box    = document.getElementById(`box-${idx}`);
-  const lockEl = document.createElement('div');
-  lockEl.className = 'lock-badge';
-  lockEl.title = 'Đã được đồng ý!';
-  lockEl.textContent = '🔒';
-  box.querySelector('.gift-inner').appendChild(lockEl);
-  box.classList.add('locked');
-}
-
-function laterGift(e, idx) {
-  e.stopPropagation();
-  const box      = document.getElementById(`box-${idx}`);
-  const closedEl = document.getElementById(`closed-${idx}`);
-  const openedEl = document.getElementById(`opened-${idx}`);
-  const lidEl    = document.getElementById(`lid-${idx}`);
-
-  const tl = gsap.timeline();
-  tl.to(openedEl, { opacity: 0, y: 22, scale: 0.88, duration: 0.3, ease: 'power2.in' })
-    .set(openedEl, { display: 'none' })
-    .set(closedEl, { display: 'flex', opacity: 0, y: -10, scale: 0.9 })
-    .to(lidEl,     { rotationX: 0, y: 0, transformPerspective: 400, transformOrigin: 'center bottom', duration: 0.4, ease: 'back.out(1.4)' }, '<')
-    .to(closedEl,  { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.4)' }, '<');
-
-  box.classList.remove('opened');
-}
-
-function restoreAccepted(idx) {
-  const box       = document.getElementById(`box-${idx}`);
-  const closedEl  = document.getElementById(`closed-${idx}`);
-  const openedEl  = document.getElementById(`opened-${idx}`);
-  const actionsEl = document.getElementById(`actions-${idx}`);
-  if (!box) return;
-
-  closedEl.style.display = 'none';
-  openedEl.style.display = 'block';
-  actionsEl.innerHTML = '<div class="gift-accepted-badge">✅ Anh Thư đã đồng ý! Hẹn hò thôi nào 😍</div>';
-
-  const lockEl = document.createElement('div');
-  lockEl.className = 'lock-badge';
-  lockEl.textContent = '🔒';
-  box.querySelector('.gift-inner').appendChild(lockEl);
-  box.classList.add('opened', 'locked');
-}
-
-/* ================================================================
-   SPARKLE BURST EFFECT on box open
-================================================================ */
-function spawnBurst() {
-  const overlay = document.getElementById('open-overlay');
-  const canvas  = document.getElementById('burst-canvas');
-  overlay.style.display = 'block';
-  const ctx = canvas.getContext('2d');
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const cx = canvas.width / 2, cy = canvas.height / 2;
-  const colors = ['#F4A7B9','#D4A843','#FBDCE2','#E8869A','#F0D080','#fff','#FFD6E0'];
-  const pts = Array.from({ length: 40 }, () => ({
-    x: cx, y: cy,
-    vx: (Math.random() - 0.5) * 11,
-    vy: (Math.random() - 0.5) * 11,
-    r: Math.random() * 6 + 2,
-    alpha: 1,
-    color: colors[Math.floor(Math.random() * colors.length)],
-  }));
-
-  let raf;
-  function frame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let alive = false;
-    pts.forEach(p => {
-      p.x += p.vx; p.y += p.vy; p.vy += 0.2;
-      p.alpha -= 0.02;
-      if (p.alpha > 0) {
-        alive = true;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.alpha;
-        ctx.fill();
+      function openBox(idx) {
+        const box = document.getElementById(`box-${idx}`);
+        if (box.classList.contains("opened")) return;
+        const closedEl = document.getElementById(`closed-${idx}`);
+        const openedEl = document.getElementById(`opened-${idx}`);
+        const shimmerEl = document.getElementById(`shimmer-${idx}`);
+        const lidEl = document.getElementById(`lid-${idx}`);
+        const tl = gsap.timeline();
+        tl.to(lidEl, {
+          rotationX: -170,
+          y: -54,
+          transformPerspective: 400,
+          transformOrigin: "center bottom",
+          duration: 0.55,
+          ease: "power2.inOut",
+        })
+          .to(
+            closedEl,
+            {
+              opacity: 0,
+              y: -18,
+              scale: 0.88,
+              duration: 0.3,
+              ease: "power2.in",
+            },
+            "-=0.18",
+          )
+          .set(closedEl, { display: "none" })
+          .set(openedEl, { display: "block", opacity: 0, scale: 0.84, y: 22 })
+          .to(openedEl, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.52,
+            ease: "back.out(1.6)",
+          });
+        tl.to(shimmerEl, { opacity: 1, duration: 0.18 }, "-=0.3").to(
+          shimmerEl,
+          { opacity: 0, duration: 0.9 },
+          "+=0.06",
+        );
+        spawnBurst();
+        box.classList.add("opened");
       }
-    });
-    ctx.globalAlpha = 1;
-    if (alive) raf = requestAnimationFrame(frame);
-    else { overlay.style.display = 'none'; cancelAnimationFrame(raf); }
-  }
-  requestAnimationFrame(frame);
-}
 
-/* ================================================================
-   SCROLL ENTRANCE ANIMATIONS
-================================================================ */
-(function () {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
+      function acceptGift(e, idx) {
+        e.stopPropagation();
+        document.getElementById(`actions-${idx}`).innerHTML =
+          '<div class="gift-accepted-badge">✅ Em đã đồng ý! Hẹn hò thôi nào 😍</div>';
+        if (!boxState.accepted.includes(idx)) {
+          boxState.accepted.push(idx);
+          localStorage.setItem("boxStateAnni", JSON.stringify(boxState));
+        }
+        const lockEl = document.createElement("div");
+        lockEl.className = "lock-badge";
+        lockEl.title = "Đã được đồng ý!";
+        lockEl.textContent = "🔒";
+        document
+          .getElementById(`box-${idx}`)
+          .querySelector(".gift-inner")
+          .appendChild(lockEl);
+        document.getElementById(`box-${idx}`).classList.add("locked");
       }
-    });
-  }, { threshold: 0.12 });
 
-  document.querySelectorAll('.tl-item, .gift-box, .love-note-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(32px)';
-    el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
-    observer.observe(el);
-  });
-})();
-</script>
-</body>
+      function laterGift(e, idx) {
+        e.stopPropagation();
+        const box = document.getElementById(`box-${idx}`);
+        const closedEl = document.getElementById(`closed-${idx}`);
+        const openedEl = document.getElementById(`opened-${idx}`);
+        const lidEl = document.getElementById(`lid-${idx}`);
+        gsap
+          .timeline()
+          .to(openedEl, {
+            opacity: 0,
+            y: 22,
+            scale: 0.88,
+            duration: 0.3,
+            ease: "power2.in",
+          })
+          .set(openedEl, { display: "none" })
+          .set(closedEl, { display: "flex", opacity: 0, y: -10, scale: 0.9 })
+          .to(
+            lidEl,
+            {
+              rotationX: 0,
+              y: 0,
+              transformPerspective: 400,
+              transformOrigin: "center bottom",
+              duration: 0.4,
+              ease: "back.out(1.4)",
+            },
+            "<",
+          )
+          .to(
+            closedEl,
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.4,
+              ease: "back.out(1.4)",
+            },
+            "<",
+          );
+        box.classList.remove("opened");
+      }
+
+      function restoreAccepted(idx) {
+        const box = document.getElementById(`box-${idx}`);
+        if (!box) return;
+        document.getElementById(`closed-${idx}`).style.display = "none";
+        document.getElementById(`opened-${idx}`).style.display = "block";
+        document.getElementById(`actions-${idx}`).innerHTML =
+          '<div class="gift-accepted-badge">✅ Em đã đồng ý! Hẹn hò thôi nào 😍</div>';
+        const lockEl = document.createElement("div");
+        lockEl.className = "lock-badge";
+        lockEl.textContent = "🔒";
+        box.querySelector(".gift-inner").appendChild(lockEl);
+        box.classList.add("opened", "locked");
+      }
+
+      /* ================================================================
+   SPARKLE BURST
+================================================================ */
+      function spawnBurst() {
+        const overlay = document.getElementById("open-overlay");
+        const canvas = document.getElementById("burst-canvas");
+        overlay.style.display = "block";
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const cx = canvas.width / 2,
+          cy = canvas.height / 2;
+        const colors = [
+          "#E8879C",
+          "#C89838",
+          "#F9D5DC",
+          "#C96B7E",
+          "#E8C468",
+          "#fff",
+          "#FFD6E0",
+        ];
+        const pts = Array.from({ length: 40 }, () => ({
+          x: cx,
+          y: cy,
+          vx: (Math.random() - 0.5) * 11,
+          vy: (Math.random() - 0.5) * 11,
+          r: Math.random() * 6 + 2,
+          alpha: 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        }));
+        let raf;
+        function frame() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let alive = false;
+          pts.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.2;
+            p.alpha -= 0.02;
+            if (p.alpha > 0) {
+              alive = true;
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+              ctx.fillStyle = p.color;
+              ctx.globalAlpha = p.alpha;
+              ctx.fill();
+            }
+          });
+          ctx.globalAlpha = 1;
+          if (alive) raf = requestAnimationFrame(frame);
+          else {
+            overlay.style.display = "none";
+            cancelAnimationFrame(raf);
+          }
+        }
+        requestAnimationFrame(frame);
+      }
+
+      /* ================================================================
+   SCROLL REVEAL
+================================================================ */
+      (function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("visible");
+            });
+          },
+          { threshold: 0.12 },
+        );
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
+      })();
+    </script>
+  </body>
 </html>
